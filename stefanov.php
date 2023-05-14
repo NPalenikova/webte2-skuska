@@ -60,15 +60,17 @@ error_reporting(E_ALL);
 
         //toto len vyberem danu cast
         if (preg_match($pattern1, $content, $matches)) {
+
+            echo    "<Br> najdenych uloch " .sizeof($matches);
         // Obsah sa nachádza v $matches[1]
         $uloha = $matches[1];
-            echo "<br>Uloha: <br>";
+
         // Vypíšte obsah riešenia
-
+            echo "<br>Uloha: <br>";
             if (preg_match($pografiku, $uloha , $matches2)){
-             //   $daco = $matches2;
+                //   $daco = $matches2;
 
-              //  echo "<br> iba po grafiku"+ $daco+" koniec<br>";
+                //  echo "<br> iba po grafiku"+ $daco+" koniec<br>";
 
                 $daco = trim($matches2[1]);
                 echo 'Obsah: ' . $daco;
@@ -78,6 +80,13 @@ error_reporting(E_ALL);
                 //musim overit ci este neobsahuje grafiku a dat to bez toho
                 echo $uloha;
             }
+
+            foreach ($matches as $uloha){
+
+            }
+
+
+
 
 
 
