@@ -31,8 +31,9 @@ error_reporting(E_ALL);
 
 <body  >
 
-<div class="text-center">
+<div class="d-flex justify-content-center">
 <h1>Výpis názvov .tex súborov</h1>
+<div class= "text-left text-light bg-secondary opacity-75">
 
 <ul id="fileList"></ul>
     <?php
@@ -41,15 +42,49 @@ error_reporting(E_ALL);
     $directory = 'latex_subory';
     $files = glob($directory . '/*.tex');
 
+    $pattern1 = '/\\\begin\{task\}(.*?)\\\end\{task\}/s';
+    $pattern2 = '/\\\begin\{solution\}(.*?)\\\end\{solution\}/s';
+
+    $pattern3 = '/\\\\begin{equation\*}(.*?)\\\\end{equation\*}/s';
+    echo "neni z databazy :(";
+
     foreach ($files as $file) {
         $content = file_get_contents($file);
         $filename = basename($file);
-        echo $filename . '<br>';
-        echo "<pre>" . htmlspecialchars($content) . "</pre>";
+        echo  '<h2>'. $filename . '</h2><br>';
+
+        //TODO toto je pre cely subor
+     //   echo "<pre>" . htmlspecialchars($content) . "</pre>";
+
+
+        //toto len vyberem danu cast
+        if (preg_match($pattern1, $content, $matches)) {
+        // Obsah sa nachádza v $matches[1]
+        $uloha = $matches[1];
+            echo "<br>Uloha: <br>";
+        // Vypíšte obsah riešenia
+            echo $uloha;
+
+        }
+        if (preg_match($pattern3, $content, $matches)) {
+            // Obsah sa nachádza v $matches[1]
+            $solution = $matches[1];
+
+            echo "<br><br> Solution:<br>";
+            // Vypíšte obsah riešenia
+            echo $solution;
+
+        }else{
+            echo "<br> nenaslo cast so solution";
+        }
+
+        break;
 
     }
     ?>
 
+</div>
+    <h2>Je tu predcasny break</h2>
 </div>
 
 
