@@ -42,9 +42,10 @@ error_reporting(E_ALL);
     $directory = 'latex_subory';
     $files = glob($directory . '/*.tex');
 
+   // $pattern1 = '/\\\begin\{task\}(.*?)\\\includegraphics/s';
     $pattern1 = '/\\\begin\{task\}(.*?)\\\end\{task\}/s';
     $pattern2 = '/\\\begin\{solution\}(.*?)\\\end\{solution\}/s';
-
+    $pografiku='/(.*?)\\\includegraphics/s';
     $pattern3 = '/\\\\begin{equation\*}(.*?)\\\\end{equation\*}/s';
     echo "neni z databazy :(";
 
@@ -54,7 +55,7 @@ error_reporting(E_ALL);
         echo  '<h2>'. $filename . '</h2><br>';
 
         //TODO toto je pre cely subor
-     //   echo "<pre>" . htmlspecialchars($content) . "</pre>";
+        //echo "<pre>" . htmlspecialchars($content) . "</pre>";
 
 
         //toto len vyberem danu cast
@@ -63,8 +64,42 @@ error_reporting(E_ALL);
         $uloha = $matches[1];
             echo "<br>Uloha: <br>";
         // Vypíšte obsah riešenia
-            echo $uloha;
 
+            if (preg_match($pografiku, $uloha , $matches2)){
+             //   $daco = $matches2;
+
+              //  echo "<br> iba po grafiku"+ $daco+" koniec<br>";
+
+                $daco = trim($matches2[1]);
+                echo 'Obsah: ' . $daco;
+                echo "<br> mal by tuna skoncit";
+            }else{
+
+                //musim overit ci este neobsahuje grafiku a dat to bez toho
+                echo $uloha;
+            }
+
+
+
+            if (preg_match('/\\\\includegraphics\s*{([^}]*)}/', $content, $matches2)) {
+                $obrazok = $matches2[1];
+                echo '<br> Obrazok: ' . $obrazok;
+                $imageUrl = $obrazok;
+            //    $imageUrl = 'zadanie99/images/blokovka01_00002.jpg';
+                $imageName = basename($imageUrl);
+                echo '<br>Názov obrázka: ' . $imageName;
+              //  echo '<br>Názov obrázka: ' . 'latex_subory' +$imageName;
+
+                //echo '<img src=" latex_subory/' . +$imageName . '" alt="Obrázok">';
+                echo '<img src="latex_subory/images/' .  $imageName . '" alt="Obrázok">';
+
+            } else {
+                echo '<br> nema obrazok';
+            }
+
+
+        }else{
+            echo " nenaslo cast so zadanim ulohy";
         }
         if (preg_match($pattern3, $content, $matches)) {
             // Obsah sa nachádza v $matches[1]
@@ -75,7 +110,7 @@ error_reporting(E_ALL);
             echo $solution;
 
         }else{
-            echo "<br> nenaslo cast so solution";
+            echo " nenaslo cast so solution";
         }
 
       //  break;
