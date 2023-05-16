@@ -3,7 +3,7 @@
 //$username = "root";
 //$password = "password";
 //$dbname = "sadasad";
-require_once('config.php');
+require_once('../config.php');
 $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -43,7 +43,7 @@ if (!empty($_POST)) {
         $equationRegex = '/\\\\begin{equation\\*}([\\s\\S]*?)\\\\end{equation\\*}/';
         $imageRegex = '/\\\\includegraphics{(?:zadanie99\\/)?([^{}]+)}/';
 
-        $fileContents = file_get_contents('latex_subory/odozva01pr.tex');
+        $fileContents = file_get_contents('../latex_subory/odozva01pr.tex');
         $files = glob($directory . '/*.tex');
         foreach ($files as $file) {
             $filename = basename($file);

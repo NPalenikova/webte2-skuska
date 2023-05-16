@@ -3,7 +3,7 @@
 //$username = "root";
 //$password = "password";
 //$dbname = "sadasad";
-require_once('config.php');
+require_once('../config.php');
 $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
 
 
