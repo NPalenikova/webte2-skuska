@@ -26,7 +26,7 @@ const imageRegex = /\\includegraphics{(?:zadanie99\/)?([^{}]+)}/;
 fetch('latex_subory/odozva01pr.tex')
     .then(response => response.text())
     .then(text => {
-        const sections = [];x;
+        const sections = [];
         let sectionMatch;
         while ((sectionMatch = sectionRegex.exec(text)) !== null) {
             const sectionTitle = sectionMatch[1];
