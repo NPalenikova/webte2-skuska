@@ -1,5 +1,64 @@
 <?php
+session_start();
 
-echo "login page";
-
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    if($_SESSION["userType"] == 'student'){
+        header("location: ../index.php");
+    }
+    else{
+        header("location: ../index.php");
+    }
+    exit;  
+}
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="login.js"></script>
+</head>
+<body>
+    <div class="d-flex justify-content-end container my-3 ">
+        <div class="p-2">Don't have an account yet?</div>
+		<a class="btn btn-primary" href="../signup/signup.html" role="button" style="background-color: #1261A0; border-color:#1261A0;">Sign Up</a>
+    </div> 
+
+    <form class="container my-3" name="loginForm" onsubmit="return chechLogin()" action="process_login.php" method="post" novalidate>
+        <input type="hidden" id="userType" name="userType">
+        <div class="my-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="email@stuba.sk" aria-describedby="emailHelpBlock">
+            <div id="emailHelpBlock" class="form-text">
+                Login with a university email.
+            </div>
+        </div>
+
+        <div class="my-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" aria-describedby="passwordHelpBlock">
+            <div id="passwordHelpBlock" class="form-text">
+                Please enter your password.
+            </div>
+        </div>
+
+        <button class="btn btn-primary my-3" type="submit" style="background-color: #072F5F; border-color:#072F5F;">Log in</button>
+    </form>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="myToast" class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body"></div>
+        </div>
+    </div>
+</body>
+</html>
