@@ -31,8 +31,9 @@ error_reporting(E_ALL);
 
 <body  >
 
-<div class="text-center">
+<div class="d-flex justify-content-center">
 <h1>Výpis názvov .tex súborov</h1>
+<div class= "text-left text-light bg-secondary opacity-75">
 
 <ul id="fileList"></ul>
     <?php
@@ -41,15 +42,93 @@ error_reporting(E_ALL);
     $directory = 'latex_subory';
     $files = glob($directory . '/*.tex');
 
+   // $pattern1 = '/\\\begin\{task\}(.*?)\\\includegraphics/s';
+    $pattern1 = '/\\\begin\{task\}(.*?)\\\end\{task\}/s';
+    $pattern2 = '/\\\begin\{solution\}(.*?)\\\end\{solution\}/s';
+    $pografiku='/(.*?)\\\includegraphics/s';
+    $pattern3 = '/\\\\begin{equation\*}(.*?)\\\\end{equation\*}/s';
+    echo "neni z databazy :(";
+
     foreach ($files as $file) {
         $content = file_get_contents($file);
         $filename = basename($file);
-        echo $filename . '<br>';
-        echo "<pre>" . htmlspecialchars($content) . "</pre>";
+        echo  '<h2>'. $filename . '</h2><br>';
+
+        //TODO toto je pre cely subor
+        //echo "<pre>" . htmlspecialchars($content) . "</pre>";
+
+
+        //toto len vyberem danu cast
+        if (preg_match($pattern1, $content, $matches)) {
+
+            echo    "<Br> najdenych uloch " .sizeof($matches);
+        // Obsah sa nachádza v $matches[1]
+        $uloha = $matches[1];
+
+        // Vypíšte obsah riešenia
+            echo "<br>Uloha: <br>";
+            if (preg_match($pografiku, $uloha , $matches2)){
+                //   $daco = $matches2;
+
+                //  echo "<br> iba po grafiku"+ $daco+" koniec<br>";
+
+                $daco = trim($matches2[1]);
+                echo 'Obsah: ' . $daco;
+                echo "<br> mal by tuna skoncit";
+            }else{
+
+                //musim overit ci este neobsahuje grafiku a dat to bez toho
+                echo $uloha;
+            }
+
+            foreach ($matches as $uloha){
+
+            }
+
+
+
+
+
+
+            if (preg_match('/\\\\includegraphics\s*{([^}]*)}/', $content, $matches2)) {
+                $obrazok = $matches2[1];
+                echo '<br> Obrazok: ' . $obrazok;
+                $imageUrl = $obrazok;
+            //    $imageUrl = 'zadanie99/images/blokovka01_00002.jpg';
+                $imageName = basename($imageUrl);
+                echo '<br>Názov obrázka: ' . $imageName;
+              //  echo '<br>Názov obrázka: ' . 'latex_subory' +$imageName;
+
+                //echo '<img src=" latex_subory/' . +$imageName . '" alt="Obrázok">';
+                echo '<img src="latex_subory/images/' .  $imageName . '" alt="Obrázok">';
+
+            } else {
+                echo '<br> nema obrazok';
+            }
+
+
+        }else{
+            echo " nenaslo cast so zadanim ulohy";
+        }
+        if (preg_match($pattern3, $content, $matches)) {
+            // Obsah sa nachádza v $matches[1]
+            $solution = $matches[1];
+
+            echo "<br><br> Solution:<br>";
+            // Vypíšte obsah riešenia
+            echo $solution;
+
+        }else{
+            echo " nenaslo cast so solution";
+        }
+
+      //  break;
 
     }
     ?>
 
+</div>
+    <h2>Je tu predcasny break</h2>
 </div>
 
 
