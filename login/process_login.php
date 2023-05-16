@@ -22,20 +22,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_password = $_POST['password'];
     $userType = $_POST["userType"];
 
-    if (checkEmpty($email) === true) {
+    if (checkEmpty($email)) {
         $errmsg .= "<p>Please enter email.</p>";
     } 
-    elseif (checkLength($email, 10, 127) === false) {
+    elseif (!checkLength($email, 10, 127)) {
         $errmsg .= "<p>Email has incorrect length.</p>";
     }
-    elseif (checkStuba($email)) {
+    elseif (!checkStuba($email)) {
         $errmsg .= "<p>Please use a university email.</p>";
     }
+    elseif(!isValidEmail($email)){
+        $errmsg .= "<p>Your email contains prohibited characters.</p>";
+    }
 
-    if (checkEmpty($user_password) === true) {
+    if (checkEmpty($user_password)) {
         $errmsg .= "<p>Please enter a password.</p>";
     }
-    elseif(checkLength($user_password, 8, 20) === false){
+    elseif(!checkLength($user_password, 8, 20)){
         $errmsg .= "<p>Password has incorrect length.</p>";
     }
 
@@ -45,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
             if($userType == 'student'){
-                $sql = "SELECT name, surname, id from student where email= :email";
+                $sql = "SELECT name, surname, id, password from student where email= :email";
                 $stmt = $db->prepare($sql);
         
             }
             else if($userType == 'teacher'){
-                $sql = "SELECT name, surname, id from teacher where email= :email";
+                $sql = "SELECT name, surname, id, password from teacher where email= :email";
                 $stmt = $db->prepare($sql);
             }
             
@@ -119,10 +122,19 @@ function checkLength($field, $min, $max) {
 }
 
 function checkStuba($email) {
-    if (!preg_match('/^[\w.+\-]+@stuba\.sk$/', trim($email))) {
+    if (preg_match('/@stuba\.sk$/', trim($email))) {
+        return true;
+    }
+    return false;
+}
+
+function isValidEmail($email) {
+    // Check if the email address contains only allowed characters
+    if (preg_match('/^[^\s@]{3,}@[^\s@]+\.[^\s@]{2,4}$/', $email)) {
+        return true;
+    } else {
         return false;
     }
-    return true;
 }
 ?>
 
@@ -154,11 +166,16 @@ function checkStuba($email) {
 
         if(!$userFound){
             echo
-            '<div class="d-flex flex-row justify-content-center align-items-center">
+            '<div class="d-flex flex-row justify-content-center align-items-center p-2">
                 <p class="m-0 px-1">User was not found, please   </p>
                 <a class="btn btn-primary" href="../signup/signup.html" role="button" style="background-color: #1261A0; border-color:#1261A0;">Sign Up</a>
-                <p class="m-0 px-1">   first.</p>
+                <p class="m-0 px-1">   first, or try to   </p>
+                <a class="btn btn-primary" href="login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
+                <p class="m-0 px-1">   again.</p>
             </div>';
+        }
+        else{
+            echo"Welcome " . $_SESSION["fullname"];
         }
     ?>
 </body>

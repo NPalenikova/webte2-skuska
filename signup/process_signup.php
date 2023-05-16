@@ -18,6 +18,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once('../config.php');
+$danger = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errmsg = "";
@@ -57,46 +58,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif(strcmp($user_password, $repeat_password) != 0){
         $errmsg .= "<p>Passwords don't match.</p>";
     }
+
+    try {
+        $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+        $exist = userExists($db, $email, $userType);
+    
+        if($exist){
+            $errmsg .= '<p>User with these credentials already exists. Please  </p>
+            <a class="btn btn-primary" href="../login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Login</a>';
+        }
+    
+        if (empty($errmsg)) {
+    
+            $hashed_password = password_hash($user_password, PASSWORD_ARGON2ID);
+    
+            if($userType == 'student'){
+                $sql = "INSERT INTO student (email, password, name, surname) VALUES (:email, :password, :name, :surname)";
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+                $stmt->bindParam(":password", $hashed_password, PDO::PARAM_STR);
+                $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+                $stmt->bindParam(":surname", $surname, PDO::PARAM_STR);
+            }
+            else if($userType == 'teacher'){
+                $sql = "INSERT INTO teacher (email, password, name, surname) VALUES (:email, :password, :name, :surname)";
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+                $stmt->bindParam(":password", $hashed_password, PDO::PARAM_STR);
+                $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+                $stmt->bindParam(":surname", $surname, PDO::PARAM_STR);
+            }
+    
+            $stmt->execute();
+            echo "Data has been stored in the database.";
+        }
+    
+    } catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
 }
-
-try {
-    $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $exist = userExists($db, $email, $userType);
-
-    if($exist){
-        $errmsg .= '<p>User with these credentials already exists. Please  </p>
-        <a class="btn btn-primary" href="../login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Login</a>';
-    }
-
-    if (empty($errmsg)) {
-
-        $hashed_password = password_hash($user_password, PASSWORD_ARGON2ID);
-
-        if($userType == 'student'){
-            $sql = "INSERT INTO student (email, password, name, surname) VALUES (:email, :password, :name, :surname)";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-            $stmt->bindParam(":password", $hashed_password, PDO::PARAM_STR);
-            $stmt->bindParam(":name", $name, PDO::PARAM_STR);
-            $stmt->bindParam(":surname", $surname, PDO::PARAM_STR);
-        }
-        else if($userType == 'teacher'){
-            $sql = "INSERT INTO teacher (email, password, name, surname) VALUES (:email, :password, :name, :surname)";
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-            $stmt->bindParam(":password", $hashed_password, PDO::PARAM_STR);
-            $stmt->bindParam(":name", $name, PDO::PARAM_STR);
-            $stmt->bindParam(":surname", $surname, PDO::PARAM_STR);
-        }
-
-        $stmt->execute();
-        echo "Data has been stored in the database.";
-    }
-
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+else{
+    $danger = true;
+    $errmsg = ' ';
 }
 
 
@@ -173,6 +178,16 @@ function userExists($db, $email, $userType){
 </head>
 <body>
     <?php
+
+        if($danger){
+            echo
+            '<div class="d-flex flex-row justify-content-center align-items-center">
+                <p class="m-0 px-1">How did you get here? Please   </p>
+                <a class="btn btn-primary" href="login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
+                <p class="m-0 px-1">   first.</p>
+            </div>';
+        }
+
         if (!empty($errmsg)) {
             echo $errmsg;
         }
