@@ -1,7 +1,7 @@
 function generateCSV(){
     const table = document.getElementById("students");
     const data = [];
-
+ 
     const headerRow = table.getElementsByTagName("thead")[0].getElementsByTagName("tr")[0];
     const headers = Array.from(headerRow.getElementsByTagName("th")).map(header => header.textContent);
     data.push(headers); 
