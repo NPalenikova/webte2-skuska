@@ -63,7 +63,7 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="navod.html">Manual</a>
+                        <a class="nav-link active" href="manual.html">Manual</a>
                     </li>
                 </ul>
             </div>
