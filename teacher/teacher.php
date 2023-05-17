@@ -4,6 +4,20 @@
 //$password = "password";
 //$dbname = "sadasad";
 require_once('../config.php');
+
+session_start();
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    $displayValue = 'block';
+    if($_SESSION["userType"] == 'student'){
+        header("location: ../student/stefanov.php");
+    }
+}
+else{
+    $displayValue = 'none';
+    header("location: ../index.php");
+}
+
 $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -126,7 +140,6 @@ if (!empty($_POST)) {
     $set_problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
 ?>
 
 
@@ -158,7 +171,10 @@ if (!empty($_POST)) {
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="manual.html">Manual</a>
+                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="manual.php">Manual</a>
                     </li>
                 </ul>
             </div>
