@@ -38,7 +38,7 @@ error_reporting(E_ALL);
 
 
 <body  >
-
+ 
 <div class="d-flex justify-content-center">
 <h1>Výpis názvov .tex súborov</h1>
 <div class= "text-left text-light bg-secondary opacity-75">

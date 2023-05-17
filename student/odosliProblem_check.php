@@ -61,7 +61,7 @@ require_once('../config.php');
         $stmt->execute();
     }
 
-
+ 
     function posliProblemCheck($db, $data){
         //ID?
         //lastinserted id metoda
