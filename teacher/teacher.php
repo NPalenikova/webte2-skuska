@@ -168,8 +168,8 @@ if (!empty($_POST)) {
 <body>
 <div>
     <form action="#" method="post">
-    <table id="sets" class="table table-striped table-bordered table-hover">
-        <thead>
+        <table id="sets" class="table table-striped table-bordered table-hover">
+            <thead>
             <tr>
                 <th>Filename</th>
                 <th>Allowed</th>
@@ -178,10 +178,10 @@ if (!empty($_POST)) {
                 <th>Date to</th>
                 <th>Points</th>
             </tr>
-        </thead>
-        <tbody>
-        <?php
-        $counter = 0;
+            </thead>
+            <tbody>
+            <?php
+            $counter = 0;
             foreach ($set_problems as $set){
                 $checkedAllowed = "";
                 $checkedDate = "";
@@ -201,9 +201,9 @@ if (!empty($_POST)) {
                 echo '</tr>';
                 $counter++;
             }
-        ?>
-        </tbody>
-    </table>
+            ?>
+            </tbody>
+        </table>
         <button type="submit">Submit</button>
     </form>
     <form action="#" method="post">
