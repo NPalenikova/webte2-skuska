@@ -50,6 +50,11 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <a class="nav-link active" aria-current="page" href="#">Students</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="navod.html">Manual</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

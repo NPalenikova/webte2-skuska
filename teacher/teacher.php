@@ -158,6 +158,11 @@ if (!empty($_POST)) {
                         <a class="nav-link" href="students.php">Students</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="navod.html">Manual</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
