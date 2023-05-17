@@ -56,6 +56,7 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 <body>
 <div class="container">
+    <button id="csv" onclick="generateCSV()">Download as csv</button>
     <table id="students" class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
@@ -86,5 +87,6 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
         window.location.href = "studentDetail.php?id=" + id;
     }
 </script>
+<script src="csv.js"></script>
 </body>
 </html>

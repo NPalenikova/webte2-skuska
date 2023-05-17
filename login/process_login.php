@@ -6,7 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'student'){
         header("location: ../index.php");
     }
-    else{
+    else{ 
         header("location: ../index.php");
     }
     exit;  
@@ -75,10 +75,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if($userType == 'student'){
                             //student 1st page
                             //header("location: restricted.php");
+                            echo "student 1st page";
                         }
                         elseif($userType == 'teacher'){
-                            //teacher 1st page
-                            //header("location: restricted.php");
+                            header("location: ../teacher/teacher.php");
                         }
                         $userFound = true;
                         
