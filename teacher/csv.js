@@ -1,5 +1,5 @@
 function generateCSV(){
-    const table = document.getElementById("tab1");
+    const table = document.getElementById("students");
     const data = [];
 
     const headerRow = table.getElementsByTagName("thead")[0].getElementsByTagName("tr")[0];
