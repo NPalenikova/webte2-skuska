@@ -4,9 +4,21 @@
 //$password = "password";
 //$dbname = "sadasad";
 require_once('../config.php');
+
+session_start();
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    $displayValue = 'block';
+    if($_SESSION["userType"] == 'student'){
+        header("location: ../student/stefanov.php");
+    }  
+}
+else{
+    $displayValue = 'none';
+    header("location: ../index.php");
+}
+
 $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-
-
 
 $query = "SELECT s.id, s.name, s.surname, SUM(CASE WHEN pc.check_problem = 1 THEN 1 ELSE 0 END) AS correct_problems_count, SUM(CASE WHEN pc.submitted = 1 THEN 1 ELSE 0 END) AS submitted_count, SUM(CASE WHEN pc.check_problem = 1 THEN sp.points ELSE 0 END) as earned_points, SUM(sp.points) as total_points
 FROM student s
@@ -48,6 +60,14 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Students</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="manual.php">Manual</a>
                     </li>
                 </ul>
             </div>

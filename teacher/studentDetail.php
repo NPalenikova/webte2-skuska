@@ -3,6 +3,19 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    session_start();
+
+    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+        $displayValue = 'block';
+        if($_SESSION["userType"] == 'student'){
+            header("location: ../student/stefanov.php");
+        }
+    }
+    else{
+        $displayValue = 'none';
+        header("location: ../index.php");
+    }
+
 require_once('../config.php');
 
 if (!isset($_GET['id'])) {
@@ -59,6 +72,14 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Students</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="manual.php">Manual</a>
                     </li>
                 </ul>
             </div>

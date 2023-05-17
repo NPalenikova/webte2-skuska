@@ -3,10 +3,10 @@ session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'student'){
-        header("location: ../index.php");
+        header("location: ../student/stefanov.php");
     }
     else{
-        header("location: ../index.php");
+        header("location: ../teacher/teacher.php");
     }
     exit;  
 }
@@ -27,7 +27,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 <body>
     <div class="d-flex justify-content-end container my-3 ">
         <div class="p-2">Don't have an account yet?</div>
-		<a class="btn btn-primary" href="../signup/signup.html" role="button" style="background-color: #1261A0; border-color:#1261A0;">Sign Up</a>
+		<a class="btn btn-primary" href="../signup/signup.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Sign Up</a>
     </div> 
 
     <form class="container my-3" name="loginForm" onsubmit="return chechLogin()" action="process_login.php" method="post" novalidate>

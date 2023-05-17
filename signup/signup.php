@@ -3,10 +3,10 @@ session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'student'){
-        header("location: ../index.php");
+        header("location: ../student/stefanov.php");
     }
     else{
-        header("location: ../index.php");
+        header("location: ../teacher/teacher.php");
     }
     exit;  
 }
