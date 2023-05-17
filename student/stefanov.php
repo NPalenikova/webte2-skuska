@@ -24,6 +24,7 @@ error_reporting(E_ALL);
 
 <body>
 
+<!-- mroz gone
 <style>
     body {
 
@@ -32,7 +33,7 @@ error_reporting(E_ALL);
         background-repeat: no-repeat;
     }
 </style>
-
+-->
 
 <a href="../index.php">index</a>
 
@@ -40,8 +41,8 @@ error_reporting(E_ALL);
 <body  >
 
 <div class="d-flex justify-content-center">
-<h1>Výpis názvov .tex súborov</h1>
-<div class= "text-left text-light bg-secondary opacity-75">
+
+<div class= " text-light bg-secondary opacity-75 w-75 ps-5 pe-5 vh-100 ">
 
 <ul id="fileList"></ul>
 
@@ -57,6 +58,7 @@ error_reporting(E_ALL);
     <script src="kodNaPorovnanie.js"></script>
 
     <?php
+
 
 
     require_once ('../config.php');
@@ -92,9 +94,6 @@ error_reporting(E_ALL);
 
 
 
-        //$query7 =  "SELECT *  FROM problem WHERE id_set =:idZiaka";
-
-
         $stmt = $db->prepare($hladamSady);
 
         //TODO premenna zodpovedna za id studenta
@@ -107,17 +106,16 @@ error_reporting(E_ALL);
 
 
 
-
         $stmt->bindParam(":idZiaka",$ziakIdPrihlaseny );
 
         $stmt->execute();
 
 
-      //  $stmt = $db->query($hladamSady);
-
 
         $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo "overujem studentove testy";
+        //TODO studentove testy
+      //  echo "overujem studentove testy";
+        /*
        foreach ($zistujemodovzdane as $sada){
             echo "<br>";
            //var_dump($sada);
@@ -130,12 +128,10 @@ error_reporting(E_ALL);
 
            //TODO podla id sady dokazem vylucit moznosti
 
-       }
+       }*/
 
         //vyvorit array a ulozit ake sady uz naklikal?
-        //spravit univerzalne pre akeholvek hraca todo
 
-        echo "<h2 > finalizacia</h2>";
 
         $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems";
         $stmt = $db->query($query6);
@@ -153,18 +149,13 @@ error_reporting(E_ALL);
 
         }
 
-       echo "<br> velkost array". sizeof($arraysad). " ";
-        var_dump($arraysad);
-
-        //vytvorim tlacidlo na reset?
         echo "<tr> <th> <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ." )'> x</button> </th>";
-
 
          foreach ($oversadu as $zjemosadu){
 
 
-           // echo "<tr> <th> <button type='button' id='$zjemosadu[name]' onclick='tlacidloOdozva($zjemosadu[id] , $arraysad )'> $zjemosadu[name]</button> </th>";
-            echo "<tr> <th> <button type='button' id='$zjemosadu[name]' onclick='tlacidloOdozva($zjemosadu[id] , ".json_encode($arraysad) ." )'> $zjemosadu[name]</button> </th>";
+             echo "<tr> <th> <button type='button' id='$zjemosadu[name]' onclick='tlacidloOdozva($zjemosadu[id] , ".json_encode($arraysad) ." )'> $zjemosadu[name]</button> </th>";
+
             //datum tam pridat
             echo "<th>od $zjemosadu[date_from] </th><th>do $zjemosadu[date_to] </th>";
 
@@ -173,6 +164,8 @@ error_reporting(E_ALL);
 
         }
         echo "</table>";
+
+
         //do funkcie poslat vsetky nazvy a spravit ich funkcne, alebo urobit funkciu co zobere svoj nazov co zavolal?
 
         foreach ($oversadu as $zjemosadu){
@@ -217,48 +210,75 @@ error_reporting(E_ALL);
                         //
                         $pografiku='/(.*?)\\\includegraphics/s';
 
-                    if (preg_match($pografiku, $priklady[$vybraty]['description'] , $zvastdescrition)){
-                            //pripad ked mame aj obraz
-                            //obraz aj vzorec
-                            echo "<br>uprava: ".$zvastdescrition[1];
-                            //este oddelit vzorce od textu a previest ich do normalneho tvaru
+                        if (preg_match($pografiku, $priklady[$vybraty]['description'] , $zvastdescrition)){
 
-                             $oddelvzorce='/[$]/';
-                            if ($dostan=preg_split($oddelvzorce, $zvastdescrition[1])){
+                                 $oddelvzorce='/[$]/';
+                                if ($dostan=preg_split($oddelvzorce, $zvastdescrition[1])){
+
+                                    $a=1;
+                                    //zacina nevzorcom takze ide to zisti podla toho ci je kladne alebo
+                                    //zaporne a
+
+                                    echo "<div>";
+                                    foreach ($dostan as $rozdelenie ){
+                                       if (($a%2)==0){
+                                           //echo "<br>".$a." vzorec: \begin{equation*} ".$rozdelenie. " \end{equation*}";
+
+
+                                           echo "<div class='d-inline-flex p-2'> \begin{equation*} ".$rozdelenie. " \\end{equation*}</div>>";
+                                       }else{
+
+                                           echo "<div class='d-inline-flex p-2'> ".$rozdelenie. "</div>";
+                                       }
+
+                                        $a++;
+                                    }
+                                    echo "</div>";
+
+
+                                }
+
+                            echo '<img  src="../latex_subory/' .  $priklady[$vybraty]['picture_path'] . '" alt="Obrázok"  class = "img-responsive img-thumbnail">';
+
+                            echo "<br>id prikladu ".$priklady[$vybraty]['id'];
+                           // echo "<br>Solution ".$priklady[$vybraty]['solution'];
+
+
+                        }else{
+                            //bez obrazu, iba vyberem zvorec odtial, ps. nebol testovany
+                            //echo "<br>nema g:".$priklady[$vybraty]['description'];
+
+                            $oddelvzorce='/[$]/';
+                            if ($dostan=preg_split($oddelvzorce, $zvastdescrition)){
 
                                 $a=1;
                                 //zacina nevzorcom takze ide to zisti podla toho ci je kladne alebo
                                 //zaporne a
-                                foreach ($dostan as $rozdelenie ){
-                                   if (($a%2)==0){
-                                       //echo "<br>".$a." vzorec: \begin{equation*} ".$rozdelenie. " \end{equation*}";
-                                       echo " vzorec: \begin{equation*} ".$rozdelenie. " \\end{equation*}";
-                                   }else{
 
-                                       echo "<br>".$a." ".$rozdelenie;
-                                   }
+                                echo "<div>";
+                                foreach ($dostan as $rozdelenie ){
+                                    if (($a%2)==0){
+
+                                        echo "<div class='d-inline-flex p-2'> \begin{equation*} ".$rozdelenie. " \\end{equation*}</div>>";
+                                    }else{
+
+                                        echo "<div class='d-inline-flex p-2'> ".$rozdelenie. "</div>";
+                                    }
 
                                     $a++;
-
-
                                 }
+                                echo "</div>";
+
+
                             }
 
-                        echo '<img src="../latex_subory/' .  $priklady[$vybraty]['picture_path'] . '" alt="Obrázok">';
 
-                        echo "<br>id prikladu ".$priklady[$vybraty]['id'];
-                        echo "<br>Solution ".$priklady[$vybraty]['solution'];
 
-                        //TODO vytvorim skrite div co bude mat v sebe solution, id toho div bude v sebe mat cislo id sady?
-                        //
-                        //TODO nahrad s za x
-                        echo "<div id='solution$sada[id]'>".$priklady[$vybraty]['solution']." </div>";
-                        echo "<div id='priklad$sada[id]' style='display: none'>".$priklady[$vybraty]['id']." </div>";
+                        }
 
-                    }else{
-                        //bez obrazu, iba vyberem zvorec odtial
-                        echo "<br>nema g:".$priklady[$vybraty]['description'];
-                    }
+                //nevymazavat tieto divy, obsahuju v sebe info co zbiera js
+                echo "<div id='solution$sada[id]' style='display: none'>".$priklady[$vybraty]['solution']." </div>";
+                echo "<div id='priklad$sada[id]' style='display: none'>".$priklady[$vybraty]['id']." </div>";
 
 
 
@@ -296,11 +316,6 @@ error_reporting(E_ALL);
 </div>
     <h1 id="output">  </h1>
     <div ></div>
-
-
-
-
-
 
 
 
