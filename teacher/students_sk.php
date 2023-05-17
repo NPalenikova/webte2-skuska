@@ -15,7 +15,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 else{
     $displayValue = 'none';
-    header("location: ../index.php");
+    header("location: ../index_sk.php");
 }
 
 $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
@@ -56,28 +56,28 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="teacher.php">Sets</a>
+                        <a class="nav-link" href="teacher_sk.php">Sady príkladov</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Students</a>
+                        <a class="nav-link active" aria-current="page" href="#">Študenti</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="students_sk.php">
+                        <a class="nav-link" href="#">
                             <img src="../resources/images/sk.png" alt="sk-flag" width="40" height="27">
                         </a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="students.php">
                             <img src="../resources/images/uk.png" alt="uk-flag" width="40" height="20">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                        <a class="btn btn-secondary" href="../logout_sk.php" style="display: <?php echo $displayValue; ?>">Odhlásiť sa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="manual.php">Manual</a>
+                        <a class="nav-link active" href="manual_sk.php">Návod</a>
                     </li>
                 </ul>
             </div>
@@ -86,16 +86,16 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 <body>
 <div class="container">
-    <button id="csv" class="btn btn-outline-secondary my-3" onclick="generateCSV()">Download as .csv</button>
+    <button id="csv" class="btn btn-outline-secondary my-3" onclick="generateCSV()">Stiahnuť ako .csv</button>
     <table id="students" class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-            <th>Student Id</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Submitted problems</th>
-            <th>Correct problems</th>
-            <th>Points</th>
+            <th>Id Študenta</th>
+            <th>Meno</th>
+            <th>Priezvisko</th>
+            <th>Odovzdané príklady</th>
+            <th>Správne príklady</th>
+            <th>Body</th>
         </tr>
         </thead>
         <tbody>
@@ -114,7 +114,7 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <script>
     function studentDetail(id){
-        window.location.href = "studentDetail.php?id=" + id;
+        window.location.href = "studentDetail_sk.php?id=" + id;
     }
 </script>
 <script src="csv.js"></script>
