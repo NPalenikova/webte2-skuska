@@ -18,7 +18,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 7yG0I8LGyEb3P1c
       MYSQL_DB_CONNECTION: localhost
-      MYSQL_DB_NAME: sadasad
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      SITE_URL: http://localhost
+      MYSQL_DB_NAME: krajiny
+      MYSQL_USER: xchrappaj
+      MYSQL_PASSWORD: 7yG0I8LGyEb3P1c
