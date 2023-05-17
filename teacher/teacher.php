@@ -32,18 +32,16 @@ $stmt = $db->query($query);
 $set_problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (!empty($_POST)) {
+
     if (isset($_POST["update"])){
         $query = "DELETE FROM set_problems";
         $stmt = $db->query($query);
         $stmt->execute();
-
-        $directory = 'latex_subory';
+        $directory = '../latex_subory';
         $sectionRegex = '/\\\\section\*{(.+?)}([\\s\\S]*?)(?=\\\\section|$)/s';
         $descriptionRegex = '/\\\\begin{task}([\\s\\S]*?)\\\\end{task}|\\\\includegraphics/';
         $equationRegex = '/\\\\begin{equation\\*}([\\s\\S]*?)\\\\end{equation\\*}/';
         $imageRegex = '/\\\\includegraphics{(?:zadanie99\\/)?([^{}]+)}/';
-
-        $fileContents = file_get_contents('../latex_subory/odozva01pr.tex');
         $files = glob($directory . '/*.tex');
         foreach ($files as $file) {
             $filename = basename($file);
@@ -122,10 +120,10 @@ if (!empty($_POST)) {
             }
             $stmt->execute([$allowed, $date_from, $date_to, $points, $id]);
         }
-        $query = "SELECT sp.id, sp.name, sp.allowed, sp.date_from, sp.date_to, sp.points, sp.id_teacher FROM set_problems sp";
-        $stmt = $db->query($query);
-        $set_problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    $query = "SELECT sp.id, sp.name, sp.allowed, sp.date_from, sp.date_to, sp.points, sp.id_teacher FROM set_problems sp";
+    $stmt = $db->query($query);
+    $set_problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
@@ -170,8 +168,8 @@ if (!empty($_POST)) {
 <body>
 <div>
     <form action="#" method="post">
-    <table id="sets" class="table table-striped table-bordered table-hover">
-        <thead>
+        <table id="sets" class="table table-striped table-bordered table-hover">
+            <thead>
             <tr>
                 <th>Filename</th>
                 <th>Allowed</th>
@@ -180,10 +178,10 @@ if (!empty($_POST)) {
                 <th>Date to</th>
                 <th>Points</th>
             </tr>
-        </thead>
-        <tbody>
-        <?php
-        $counter = 0;
+            </thead>
+            <tbody>
+            <?php
+            $counter = 0;
             foreach ($set_problems as $set){
                 $checkedAllowed = "";
                 $checkedDate = "";
@@ -203,9 +201,9 @@ if (!empty($_POST)) {
                 echo '</tr>';
                 $counter++;
             }
-        ?>
-        </tbody>
-    </table>
+            ?>
+            </tbody>
+        </table>
         <button type="submit">Submit</button>
     </form>
     <form action="#" method="post">
