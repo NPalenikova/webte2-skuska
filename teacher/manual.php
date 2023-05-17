@@ -1,3 +1,19 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    $displayValue = 'block';
+    if($_SESSION["userType"] == 'student'){
+        header("location: ../student/stefanov.php");
+    }
+}
+else{
+    $displayValue = 'none';
+    header("location: ../index.php");
+}
+?>
+
  <!DOCTYPE html>
  <html lang="en">
  <head>
@@ -25,6 +41,9 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Manual</a>
                     </li>
                 </ul>
@@ -33,7 +52,6 @@
     </nav>
 </header>
  <body>
-
     <div id="manual">
         Site <b>Sets</b> allows the teacher to define properties of sets taken from the directory <b>latex_subory</b>.<br>
         By clicking the <b>Update</b> button, the files from the directory are stored in the database.<br>
@@ -48,6 +66,5 @@
         You can save your changes by clicking the <b>Submit</b> button. <b>If you don't click the submit button, the data will be lost.</b><br>
         <b>If you update the files, all of the previous data is erased.</b>
       </div>
-    
  </body>
  </html>

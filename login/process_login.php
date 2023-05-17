@@ -4,7 +4,7 @@ session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'student'){
-        header("location: ../index.php");
+        header("location: ../student/stefanov.php");
     }
     else{ 
         header("location: ../teacher/teacher.php");
@@ -73,9 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["fullname"] = $row['name'] . " " . $row['surname'];
                         $_SESSION["userType"] = $userType;
                         if($userType == 'student'){
-                            //student 1st page
-                            //header("location: restricted.php");
-                            echo "student 1st page";
+                            header("location: ../student/stefanov.php");
                         }
                         elseif($userType == 'teacher'){
                             header("location: ../teacher/teacher.php");

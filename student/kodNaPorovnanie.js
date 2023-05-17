@@ -228,7 +228,7 @@ function odosliodpoved(){
 
         //TODO poslat vsetky data co mam naspat do databazy
 
-
+ 
       var data = "ziakID="+ encodeURIComponent(studentId)+ "&prikladID="+encodeURIComponent(idprikladu)
           +"&sadaID="+encodeURIComponent(sadaid)+"&check_problem="+encodeURIComponent(porovnanie)+"&student_solution="+encodeURIComponent(textodpoved.innerText);
 
