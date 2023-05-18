@@ -42,9 +42,9 @@ $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <tbody>
         <?php 
             foreach ($zistujemodovzdane as $sada){
-                echo " <td>$sada[id_test]</td>";
+                echo "<tr><td>$sada[id_test]</td>";
                 echo "<td>problem $sada[id_problem]</td>";
-                echo "<td>sada $sada[id_set]</td>";
+                echo "<td>sada $sada[id_set]</td></tr>";
             }
         ?>
     </tbody>
