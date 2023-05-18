@@ -9,16 +9,16 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_HOST: localhost
+      MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_DATABASE: sadasad
-      MYSQL_USER: --- #add
-      MYSQL_PASSWORD: --- #add
+      MYSQL_USER: xchrappaj
+      MYSQL_PASSWORD: 7yG0I8LGyEb3P1c
 
   mysql:
     image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
+    command: --bind-address=0.0.0.0 --max_allowed_packet=64M --secure-file-priv=/tmp
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: --- #add
+      MYSQL_ROOT_PASSWORD: 7yG0I8LGyEb3P1c
