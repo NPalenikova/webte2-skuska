@@ -4,10 +4,10 @@ session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'student'){
-        header("location: ../student/studentTesty.php");
+        header("location: ../student/studentTesty_sk.php");
     }
     else{
-        header("location: ../teacher/teacher.php");
+        header("location: ../teacher/teacher_sk.php");
     }
 }
 
@@ -30,32 +30,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userType = $_POST["userType"];
 
     if(checkEmpty($name) || checkEmpty($surname) || checkEmpty($email) || checkEmpty($user_password) || checkEmpty($repeat_password) || checkEmpty($userType)){
-        $errmsg .= "<p>Some of the data is missing.</p>";
+        $errmsg .= "<p>Niektoré dáta chýbajú.</p>";
     }
 
     if(!checkLength($name, 1, 127)) {
-        $errmsg .= "<p>Name is too long.</p>";
+        $errmsg .= "<p>Meno je príliš dlhé.</p>";
     }
 
     if(!checkLength($surname, 1, 127)) {
-        $errmsg .= "<p>Surname is too long.</p>";
+        $errmsg .= "<p>Priezvisko je príliš dlhé.</p>";
     }
 
     if(!checkLength($email, 10, 127)) {
-        $errmsg .= "<p>Email has incorrect length.</p>";
+        $errmsg .= "<p>Email má nesprávnu dĺžku.</p>";
     }
     elseif(!checkStuba($email)) {
-        $errmsg .= "<p>Please use a university email.</p>";
+        $errmsg .= "<p>Prosím použite univerzitný email.</p>";
     }
     elseif(!isValidEmail($email)){
-        $errmsg .= "<p>Your email contains prohibited characters.</p>";
+        $errmsg .= "<p>Email obsahuje zakázané znaky.</p>";
     }
 
     if(!checkLength($user_password, 8, 20) || !checkLength($repeat_password, 8, 20)){
-        $errmsg .= "<p>Password has incorrect length.</p>";
+        $errmsg .= "<p>Heslo má nesprávnu dĺžku.</p>";
     }
     elseif(strcmp($user_password, $repeat_password) != 0){
-        $errmsg .= "<p>Passwords don't match.</p>";
+        $errmsg .= "<p>Heslá sa nezhodujú.</p>";
     }
 
     try {
@@ -65,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $exist = userExists($db, $email, $userType);
     
         if($exist){
-            $errmsg .= '<p>User with these credentials already exists. Please  </p>
-            <a class="btn btn-primary" href="../login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Login</a>';
+            $errmsg .= '<p>Používateľ s týmito údajmi už existuje. Prosím  </p>
+            <a class="btn btn-primary" href="../login/login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihláste sa</a>';
         }
     
         if (empty($errmsg)) {
@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
     
             $stmt->execute();
-            echo "Data has been stored in the database.";
+            echo "Dáta boli uložené do databázy.";
         }
     
     } catch(PDOException $e) {
@@ -166,12 +166,12 @@ function userExists($db, $email, $userType){
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Zaregistrovať sa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
@@ -184,12 +184,12 @@ function userExists($db, $email, $userType){
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="process_signup_sk.php">
+                        <a class="nav-link" href="#">
                             <img src="../resources/images/sk.png" alt="sk-flag" width="40" height="27">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="process_signup.php">
                             <img src="../resources/images/uk.png" alt="uk-flag" width="40" height="20">
                         </a>
                     </li>
@@ -204,9 +204,8 @@ function userExists($db, $email, $userType){
         if($danger){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
-                <p class="m-0 px-1">How did you get here? Please   </p>
-                <a class="btn btn-primary" href="login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
-                <p class="m-0 px-1">   first.</p>
+                <p class="m-0 px-1">Ako si sa sem dostal? Najprv sa prosím   </p>
+                <a class="btn btn-primary" href="login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlás</a>
             </div>';
         }
 
@@ -216,9 +215,8 @@ function userExists($db, $email, $userType){
         else{
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
-                <p class="m-0 px-1">Sign up was successful, you can   </p>
-                <a class="btn btn-primary" href="../login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Login</a>
-                <p class="m-0 px-1">   now.</p>
+                <p class="m-0 px-1">Registrácia bola úspešná, teraz sa môžete   </p>
+                <a class="btn btn-primary" href="../login/login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlásiť</a>
             </div>';
         }
     ?>
