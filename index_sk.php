@@ -6,10 +6,10 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $displayValue = 'block';
     $div = 'none';
     if($_SESSION["userType"] == 'student'){
-        header("location: ../student/studentTesty_sk.php");
+        header("location: student/studentTesty_sk.php");
     }
     else{
-        header("location: ../teacher/teacher_sk.php");
+        header("location: teacher/teacher_sk.php");
     }
 }
 else{

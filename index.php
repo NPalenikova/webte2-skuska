@@ -6,10 +6,10 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $displayValue = 'block';
     $div = 'none';
     if($_SESSION["userType"] == 'student'){
-        header("location: ../student/studentTesty.php");
+        header("location: student/studentTesty.php");
     }
     else{
-        header("location: ../teacher/teacher.php");
+        header("location: teacher/teacher.php");
     }
 }
 else{
@@ -59,5 +59,5 @@ else{
         <a class="btn btn-primary" href="login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Login</a>
         <a class="btn btn-primary" href="signup/signup.php" role="button" style="background-color: #072F5F; border-color:#072F5F;">Sign up</a>
     </div>
-</body>
+</body> 
 </html>

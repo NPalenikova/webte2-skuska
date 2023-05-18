@@ -10,9 +10,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         header("location: ../teacher/teacher.php");
     }
 }
-else{
-    header("location: ../index.php");
-}
 
 
 ini_set('display_errors', 1);
