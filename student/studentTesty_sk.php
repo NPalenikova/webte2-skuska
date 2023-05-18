@@ -6,7 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'teacher'){
         header("location: ../teacher/teacher_sk.php");
     }
-} 
+}
 else{
     $displayValue = 'none';
     header("location: ../index_sk.php");
@@ -21,7 +21,7 @@ error_reporting(E_ALL);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Študentove testy</title> 
+    <title>Študentove testy</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
@@ -123,32 +123,22 @@ error_reporting(E_ALL);
 
 
 
-
-        $hladamSady =  "SELECT *  FROM student_test 
-             INNER JOIN problem_check ON student_test.id_test = problem_check.id_test 
-             INNER JOIN problem ON problem_check.id_problem = problem.id
-            WHERE student_test.id_student = :idZiaka;
-             ";
-
-
-
-        $stmt = $db->prepare($hladamSady);
-
-        //TODO premenna zodpovedna za id studenta
-        //z emailu
-      //  $_SESSION["id"];
-
-
-      //  $ziakIdPrihlaseny = $_SESSION["id"];
-        $ziakIdPrihlaseny = $_SESSION["fullname"];
+        $ziakMeno = $_SESSION["fullname"];
+        $ziakIdPrihlaseny=  $_SESSION["id"];
+       //test ziaka s danym id
+      //  $ziakIdPrihlaseny=  1;
 
         echo '<script type="text/javascript"> var studentId = "' . $ziakIdPrihlaseny . '"; nastavStudentId(studentId);</script>';
 
 
-        echo "<h2 class='my-4'>Prihlásený: $ziakIdPrihlaseny </h2>";
+        echo "<h2 class='my-4'>Prihlásený: $ziakMeno   </h2>";
 
-
-
+        $hladamSady =  "SELECT *  FROM student_test 
+                 INNER JOIN problem_check ON student_test.id_test = problem_check.id_test 
+                 INNER JOIN problem ON problem_check.id_problem = problem.id
+                WHERE student_test.id_student = :idZiaka;
+                 ";
+     $stmt = $db->prepare($hladamSady);
         $stmt->bindParam(":idZiaka",$ziakIdPrihlaseny );
 
         $stmt->execute();
@@ -156,8 +146,10 @@ error_reporting(E_ALL);
 
 
         $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         //TODO studentove testy
-        //echo "overujem studentove testy";
+
+         /*   echo "overujem studentove testy";
 
        foreach ($zistujemodovzdane as $sada){
             echo "<br>";
@@ -165,17 +157,18 @@ error_reporting(E_ALL);
            echo "<br>test $sada[id_test]";
            echo "<br>problem $sada[id_problem]";
            echo "<br>sada $sada[id_set]";
-
+       }
+        */
            //kazdy z testov by mal mat unikatny kod?
            //mam sadu
 
            //TODO podla id sady dokazem vylucit moznosti
 
-       }
 
 
 
-        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems";
+
+        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems WHERE set_problems.allowed =1";
         $stmt = $db->query($query6);
         $oversadu = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // var_dump($sada);

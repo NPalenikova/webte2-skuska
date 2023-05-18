@@ -32,33 +32,59 @@ require_once('../config.php');
 try {
     $conn = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
 
-    // Vytvorenie prikazu s parametrami
-    /*$sql = "INSERT INTO your_table_name (ziakID, prikladID, sadaID, check_problem, student_solution)
-            VALUES (:ziakID, :prikladID, :sadaID, :check_problem, :student_solution)";*/
-
-    $sql = "INSERT INTO problem_check (id_problem, check_problem, submitted, student_solution)
-            VALUES (:id_problem, :check_problem, :sadaID, :check_problem, :student_solution)";
-
+    $sql ="INSERT INTO `student_test`( `id_student`) VALUES (:studentID)";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id_problem', $prikladID);
-    //$stmt->bindParam(':prikladID', $prikladID);
-    $stmt->bindParam(':sadaID', $sadaID);
-    $stmt->bindParam(':check_problem', $check_problem);
-    $stmt->bindParam(':student_solution', $student_solution);
+    $stmt->bindParam(':studentID', $ziakID);
 
-    //not worky
+    $idTest = null;
     if ($stmt->execute()) {
+        $lastInsertedId = $conn->lastInsertId();
         $response = array(
-            'message' => 'Data inserted successfully.'
+            'message' => 'Data inserted successfully. pre student_test',
+            'id_test' => $idTest
         );
     } else {
         $response = array(
-            'error' => 'Error inserting data.'
+            'error' => 'Error inserting data. pre student_test'
         );
     }
 
+    if ($idTest !== null) {
+        // Použite premennú `$idTest` podľa potreby
+        echo "ID testu: " . $idTest;
+    }
+
+
+
+    // Použitie posledného ID
+    echo "Posledne vytvorene ID: " . $lastInsertedId;
+
+    $sql = "INSERT INTO problem_check (id_test, id_problem, check_problem, submitted, student_solution)
+            VALUES (:id_test,:id_problem, :check_problem, 1 ,:student_solution)";
+    //$stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id_test', $idTest);
+    $stmt->bindParam(':id_problem', $prikladID);
+
+    $stmt->bindParam(':check_problem', $check_problem);
+    $stmt->bindParam(':student_solution', $student_solution);
+
+
+
+    if ($stmt->execute()) {
+        $response = array(
+            'message' => 'Data inserted successfully. pre problem_check'
+        );
+    } else {
+        $response = array(
+            'error' => 'Error inserting data. pre problem_check'
+        );
+    }
     // Uzatvorenie pripojenia k databáze
     $conn = null;
+
+
+
 } catch (PDOException $e) {
     $response = array(
         'error' => 'Database connection failed: ' . $e->getMessage()
