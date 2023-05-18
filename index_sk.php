@@ -16,12 +16,12 @@ else{
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login and Signup</title>
+    <title>Prihlásenie a registrácia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
@@ -34,17 +34,17 @@ else{
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav align-items-center ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="index_sk.php">
+                        <a class="nav-link" href="#">
                             <img src="resources/images/sk.png" alt="sk-flag" width="40" height="27">
                         </a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="index.php">
                             <img src="resources/images/uk.png" alt="uk-flag" width="40" height="20">
                         </a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                        <a class="btn btn-secondary" href="../logout_sk.php" style="display: <?php echo $displayValue; ?>">Odhlásiť sa</a>
                     </li>
                 </ul>
             </div>
@@ -53,8 +53,8 @@ else{
 </header>
 <body>
     <div class="container my-5" style="display: <?php echo $div; ?>">
-        <a class="btn btn-primary" href="login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Login</a>
-        <a class="btn btn-primary" href="signup/signup.php" role="button" style="background-color: #072F5F; border-color:#072F5F;">Sign up</a>
+        <a class="btn btn-primary" href="login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlásiť sa</a>
+        <a class="btn btn-primary" href="signup/signup.php" role="button" style="background-color: #072F5F; border-color:#072F5F;">Zaregistrovať sa</a>
     </div>
 </body>
 </html>

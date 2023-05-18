@@ -15,7 +15,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 else{
     $displayValue = 'none';
-    header("location: ../index.php");
+    header("location: ../index_sk.php");
 }
 
 $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
@@ -146,7 +146,7 @@ if (!empty($_POST)) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sets</title>
+    <title>Sady príkladov</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -164,28 +164,28 @@ if (!empty($_POST)) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Sets</a>
+                        <a class="nav-link active" aria-current="page" href="#">Sady príkladov</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="students.php">Students</a>
+                        <a class="nav-link" href="students_sk.php">Študenti</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="teacher_sk.php">
+                        <a class="nav-link" href="#">
                             <img src="../resources/images/sk.png" alt="sk-flag" width="40" height="27">
                         </a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="teacher.php">
                             <img src="../resources/images/uk.png" alt="uk-flag" width="40" height="20">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                        <a class="btn btn-secondary" href="../logout_sk.php" style="display: <?php echo $displayValue; ?>">Odhlásiť sa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="manual.php">Manual</a>
+                        <a class="nav-link active" href="manual_sk.php">Manual</a>
                     </li>
                 </ul>
             </div>
@@ -196,19 +196,19 @@ if (!empty($_POST)) {
 <div>
     <form class="my-3" action="#" method="post">
         <input type="hidden" name="update" value="yes">
-        <button class="btn btn-outline-secondary" type="submit">Update</button>
+        <button class="btn btn-outline-secondary" type="submit">Aktualizovať</button>
     </form>
 
     <form action="#" method="post">
         <table id="sets" class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
-                <th>Filename</th>
-                <th>Allowed</th>
-                <th>Use Date</th>
-                <th>Date From</th>
-                <th>Date to</th>
-                <th>Points</th>
+                <th>Názov súboru</th>
+                <th>Povolené</th>
+                <th>Určiť dátum</th>
+                <th>Dátum od</th>
+                <th>Dátum do</th>
+                <th>Body</th>
             </tr>
             </thead>
             <tbody>
@@ -236,7 +236,7 @@ if (!empty($_POST)) {
             ?>
             </tbody>
         </table>
-        <button class="btn btn-outline-secondary my-3" type="submit">Submit</button>
+        <button class="btn btn-outline-secondary my-3" type="submit">Potvrdiť</button>
     </form>
 
 </div>

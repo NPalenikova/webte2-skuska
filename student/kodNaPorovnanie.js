@@ -226,7 +226,7 @@ function odosliodpoved(){
     console.log("zadany text "+textodpoved.innerText);
 
 
-    //TODO poslat vsetky data co mam naspat do databazy
+        //TODO poslat vsetky data co mam naspat do databazy
 
  
       var data = "ziakID="+ encodeURIComponent(studentId)+ "&prikladID="+encodeURIComponent(idprikladu)
@@ -238,15 +238,22 @@ function odosliodpoved(){
       //TODO inu adresu, aby vedel posielat
 
       //xhr.open("POST", " https://site88.webte.fei.stuba.sk/skuska/odosliProblem_check.php");
-      xhr.open("POST", " https://site88.webte.fei.stuba.sk/skuska/odosliProblem_check.php");
+      xhr.open("POST", "odosliProblem_check.php",true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
+      /*
       xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-              console.log(xhr.status);
-              console.log(xhr.responseText);
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              console.log("xhr status "+ xhr.status);
+              console.log("xhr response " +xhr.responseText);
               xhr.send(data);
           }
-      }
+      };*/
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("Data inserted successfully.");
+        }
+    };
+    xhr.send(data);
 
 }
