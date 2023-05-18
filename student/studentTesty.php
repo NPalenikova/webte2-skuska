@@ -4,12 +4,12 @@ session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $displayValue = 'block';
     if($_SESSION["userType"] == 'teacher'){
-        header("location: ../teacher/teacher_sk.php");
+        header("location: ../teacher/teacher.php");
     }
 }
 else{
     $displayValue = 'none';
-    header("location: ../index_sk.php");
+    header("location: ../index.php");
 }
 
 ini_set('display_errors', 1);
@@ -21,7 +21,7 @@ error_reporting(E_ALL);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Študentove testy</title> 
+    <title>Student's Test</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
@@ -32,6 +32,7 @@ error_reporting(E_ALL);
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </head>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -41,31 +42,32 @@ error_reporting(E_ALL);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Študentove testy</a>
+                        <a class="nav-link active" href="#">Student's Test</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="studentTesty_sk.php">
                             <img src="../resources/images/sk.png" alt="sk-flag" width="40" height="27">
                         </a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="studentTesty.php">
+                        <a class="nav-link" href="#">
                             <img src="../resources/images/uk.png" alt="uk-flag" width="40" height="20">
                         </a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="btn btn-secondary" href="../logout_sk.php" style="display: <?php echo $displayValue; ?>">Odhlásiť sa</a>
+                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="manual_sk.php">Návod</a>
+                        <a class="nav-link" href="manual.php">Manual</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
+
 <body>
 
 <!-- mroz gone
@@ -145,7 +147,7 @@ error_reporting(E_ALL);
         echo '<script type="text/javascript"> var studentId = "' . $ziakIdPrihlaseny . '"; nastavStudentId(studentId);</script>';
 
 
-        echo "<h2 class='my-4'>Prihlásený: $ziakIdPrihlaseny </h2>";
+        echo "<h2 class='my-4'>Welcome $ziakIdPrihlaseny </h2>";
 
 
 
@@ -192,15 +194,15 @@ error_reporting(E_ALL);
 
         }
 
-        echo " <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark my-2'> Naspäť</button> ";
+        echo " <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark my-2'>Discard</button> ";
        // echo "<tr> <th> <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark'> x</button> </th>";
         echo "<table id='sets' class='table table-striped table-bordered table-hover'>";
             echo '  <thead>
             <tr>
                 <th>Test</th>
-                <th>Dátum od</th>
-                <th>Dátum do</th>
-                <th>Odovzdané</th>
+                <th>Date From</th>
+                <th>Date To</th>
+                <th>Submitted</th>
                 
             </tr>
             </thead>';
@@ -254,7 +256,7 @@ error_reporting(E_ALL);
                 $vybraty =  rand( 0,  sizeof($priklady)-1); //tuna vybere priklad
 
 
-                   echo "<br> <h2> Príklad: ". $priklady[$vybraty]['task']."</h2>";
+                   echo "<br> <h2> Problem ". $priklady[$vybraty]['task']."</h2>";
                         //TODO este rozparsovat description a vytiahnut obrazok a
                         // vytiahnut vzorec - kod na to je, poprepajat
                         //vzrorec je vyznaceny $  na zaciatku a konci
@@ -363,11 +365,11 @@ error_reporting(E_ALL);
 
     <div  class="d-flex flex-column my-2 "  >
 
-        <h2>Odpoveď</h2>
+        <h2>Solution</h2>
     <textarea class="my-2 " rows='2' cols='40' id="textodpoved"> </textarea>
 
 
-    <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark'>Odoslať</button>
+    <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark'>Submit</button>
 
    <script type="text/javascript">  dostanTextareaElement();</script>
     </div>
