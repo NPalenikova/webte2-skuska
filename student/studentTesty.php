@@ -202,7 +202,7 @@ error_reporting(E_ALL);
                 <th>Test</th>
                 <th>Date From</th>
                 <th>Date To</th>
-                <th>Submitted</th>
+                
                 
             </tr>
             </thead>';
@@ -360,28 +360,30 @@ error_reporting(E_ALL);
 
     ?>
 
-    <div id="odpoved" style="display: none;" >
+    <div id="odpoved" style="display: none;"  >
 
 
-    <div  class="d-flex flex-column my-2 "  >
+        <div  class="d-flex flex-column my-2 "  >
 
-        <h2>Solution</h2>
-    <textarea class="my-2 " rows='2' cols='40' id="textodpoved"> </textarea>
+            <h2>Solution</h2>
+            <textarea class="my-2 " rows='2' cols='40' id="textodpoved"> </textarea>
 
+            <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark'>Submit</button>
 
-    <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark'>Submit</button>
+            <script type="text/javascript">  dostanTextareaElement();</script>
 
-   <script type="text/javascript">  dostanTextareaElement();</script>
+            <h1 id="output" >  </h1>
+
+        </div>
     </div>
-    </div>
 
-    <h1 id="output" style="display: none">  </h1>
+
 
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
+    <script type="text/javascript">  resetOverenia();</script>
 
 </div>
 

@@ -193,7 +193,7 @@ error_reporting(E_ALL);
                 <th>Test</th>
                 <th>Dátum od</th>
                 <th>Dátum do</th>
-                <th>Odovzdané</th>
+                
                 
             </tr>
             </thead>';
@@ -360,19 +360,25 @@ error_reporting(E_ALL);
     <textarea class="my-2 " rows='2' cols='40' id="textodpoved"> </textarea>
 
 
-    <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark'>Odoslať</button>
+    <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark mb-5'>Odoslať</button>
 
-   <script type="text/javascript">  dostanTextareaElement();</script>
+        <script type="text/javascript">  dostanTextareaElement();</script>
+
+        <h1 id="output" >  </h1>
+        <script type="text/javascript">  dostanTextareaElement();</script>
+
+
+
     </div>
     </div>
 
-    <h1 id="output" style="display: none">  </h1>
+
 
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
+    <script type="text/javascript">  resetOverenia();</script>
 
 </div>
 

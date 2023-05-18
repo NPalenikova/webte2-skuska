@@ -138,7 +138,7 @@ studentId="";
 
 function nastavStudentId(nastav){
     studentId =nastav;
-    console.log("studentove id "+ studentId);
+   // console.log("studentove id "+ studentId);
 }
 
 rozkliknutyPriklad =null;
@@ -149,14 +149,16 @@ function prikladZakliknuty(nastav){
 }
 
 
-
+function resetOverenia(){
+    output.textContent = "";
+}
 
 function odosliodpoved(){
 
-    console.log(textodpoved.value);
+  //  console.log(textodpoved.value);
     //var ziakovaOdpoved=
-    console.log("id sady kde je priklad"+ sadaid);
-    console.log("solution "+document.getElementById("solution"+sadaid).innerText);
+  //  console.log("id sady kde je priklad"+ sadaid);
+   // console.log("solution "+document.getElementById("solution"+sadaid).innerText);
    // console.log("solution "+document.getElementById("solution"+ulozid).innerHTML);
     //dam porovnat odpoved a solution
     //TODO do tochto dostat solution
@@ -164,52 +166,30 @@ function odosliodpoved(){
     //TODO solution konvertovat do normalneho stavu
 
     rawvzorec = convertLatexToRaw(document.getElementById("solution"+sadaid).innerText);
-    console.log("Raw vzorec "+  rawvzorec);
+ //   console.log("Raw vzorec "+  rawvzorec);
     //porovnat ci su rovnake?
 //.replace(/s/g, "x");
-    console.log("prehod x/s "+rawvzorec.replace(/s/g, "x") );
-   // console.log(" "+rawvzorec.replace(/s/g, "x") );
-    console.log(textodpoved.value.replace(/[A-Za-z](?=[A-Za-z])/g, "$&*"));
+  //  console.log("prehod x/s "+rawvzorec.replace(/s/g, "x") );
+    console.log(" "+rawvzorec.replace(/s/g, "x") );
+  //  console.log(textodpoved.value.replace(/[A-Za-z](?=[A-Za-z])/g, "$&*"));
 
-    console.log( "textare prevedeny "+textodpoved.value.replace(/[A-DF-Za-df-z]/g, "x").replace(/[A-Za-z](?=[A-Za-z])/g, "$&*"))
+  //  console.log( "textare prevedeny "+textodpoved.value.replace(/[A-DF-Za-df-z]/g, "x").replace(/[A-Za-z](?=[A-Za-z])/g, "$&*"))
 
     porovnanie=  porovnajVzorce( rawvzorec.replace(/[A-DF-Za-df-z]/g, "x") ,textodpoved.value.replace(/[A-DF-Za-df-z]/g, "x").replace(/[A-Za-z](?=[A-Za-z])/g, "$&*")  );
-    //console.log("pokracuje dalej?");
-
-    //daco s tymto prikazom
 
 
 
-    //ked odoslem solution do databazy, dam resetovat stranku?
-    //TODO odoslem test,
-    // -problem check  (id_test aky test student vyplnil), (id_problem ktory to bol problem?), (submitted dam ze 1 )
-    // -vytvorim student_test
 
-    //Potrebujem id ziaka, ?
-    //id prikladu - problemu
-    //
-    //check_problem  -  ci dal spavne alebo ne
-    //
-    //submitted vzdy jedna (to nepotrebujem overovat) - skyperino , len budem zistovat ci to mal alebo ne
-    //
-    //student_solution - nahram co student nahral
-    //
 
-    //lastinserted id metoda
-
-    //Student test
-    //id studenta
-    //id testu
-
-    console.log("zbieranie dat");
+    //console.log("zbieranie dat");
     //studentve idcko
-    console.log("studentove id "+ studentId);
+   // console.log("studentove id "+ studentId);
 
     //TODO id prikladu
     //id sady???
      idprikladu=  document.getElementById("priklad"+sadaid);
 
-    console.log("id prikladu "+ idprikladu.innerText);
+   // console.log("id prikladu "+ idprikladu.innerText);
 
 
     //check_problem
@@ -217,15 +197,15 @@ function odosliodpoved(){
    // console.log("porovnanie "+porovnanie);
 
     if (porovnanie){
-        console.log("porovnanie true");
+       // console.log("porovnanie true");
     } else if(!porovnanie) {
-        console.log("porovnanie false");
+      //  console.log("porovnanie false");
     }else{
-        console.log("porovnanie undefined");
+       // console.log("porovnanie undefined");
     }
 
     //student solution
-    console.log("zadany text "+textodpoved.innerText);
+  //  console.log("zadany text "+textodpoved.innerText);
 
 
         //TODO poslat vsetky data co mam naspat do databazy
@@ -253,7 +233,7 @@ function odosliodpoved(){
       };*/
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("Data inserted successfully.");
+           // console.log("Data inserted successfully.");
         }
     };
     xhr.send(data);
