@@ -47,10 +47,10 @@ else{
                             <img src="../resources/images/uk.png" alt="uk-flag" width="40" height="20">
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item me-3">
                         <a class="btn btn-secondary" href="../logout_sk.php" style="display: <?php echo $displayValue; ?>">Odhlásiť sa</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item me-3">
                         <a class="nav-link active" href="#">Návod</a>
                     </li>
                 </ul>

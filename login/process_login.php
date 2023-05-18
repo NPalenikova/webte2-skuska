@@ -10,6 +10,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         header("location: ../teacher/teacher.php");
     } 
 }
+else{
+    $danger = true;
+}
 
 require_once "../config.php";
 $danger = false;
@@ -152,7 +155,7 @@ function isValidEmail($email) {
             echo $errmsg;
         }
 
-        if($danger){
+        elseif($danger){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
                 <p class="m-0 px-1">How did you get here? Please   </p>
@@ -161,7 +164,7 @@ function isValidEmail($email) {
             </div>';
         }
 
-        if(!$userFound){
+        elseif(!$userFound){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center p-2">
                 <p class="m-0 px-1">User was not found, please   </p>
@@ -171,7 +174,7 @@ function isValidEmail($email) {
                 <p class="m-0 px-1">   again.</p>
             </div>';
         }
-        else{
+        elseif(empty($errmsg) && !$danger && $userFound){
             echo"Welcome " . $_SESSION["fullname"];
         }
     ?>

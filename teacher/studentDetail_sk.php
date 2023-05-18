@@ -8,7 +8,7 @@
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         $displayValue = 'block';
         if($_SESSION["userType"] == 'student'){
-            header("location: ../student/stefanov.php");
+            header("location: ../student/studentTesty_sk.php");
         }
     }
     else{

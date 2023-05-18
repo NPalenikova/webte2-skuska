@@ -10,7 +10,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         header("location: ../teacher/teacher.php");
     }
 }
-
+else{
+    $danger = true;
+}
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -205,15 +207,15 @@ function userExists($db, $email, $userType){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
                 <p class="m-0 px-1">How did you get here? Please   </p>
-                <a class="btn btn-primary" href="login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
+                <a class="btn btn-primary" href="../login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
                 <p class="m-0 px-1">   first.</p>
             </div>';
         }
 
-        if (!empty($errmsg)) {
+        elseif (!empty($errmsg)) {
             echo $errmsg;
         }
-        else{
+        elseif(empty($errmsg) && !$danger){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
                 <p class="m-0 px-1">Sign up was successful, you can   </p>
