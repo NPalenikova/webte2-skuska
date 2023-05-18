@@ -35,6 +35,9 @@ else{
                     <li class="nav-item">
                         <a class="nav-link" href="studentTesty.php">Student's Test</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="odovzdane.php">Submitted Tests</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
@@ -60,14 +63,15 @@ else{
 </header>
 <body>
     <div class ="container-md my-3 py-3">
-        <button id="download" class="btn btn-outline-secondary my-3" onclick="generatePDF()">Stiahnuť ako .pdf</button>
+        <button id="download" class="btn btn-outline-secondary my-3" onclick="generatePDF()">Download as .pdf</button>
         <div id="manual">
             <p>Site <b>Student's test</b> allows the student to see which tests have been allowed by the teacher and with what rules.<br>
             By pressing the button in column <b>Test</b> you will see the problem generated from the selected set and a field for your solution. <br>
             By pressing the button <b>Close</b> you will close all of the generated problems.<br>
-            
             You can enter your solution of the given problem into the <b>Solution</b> text field.<br>
             By pressing the <b>Submit button</b> you can submit your solution. <b> If you do not click Submit the data won't be saved.</b><br>
+
+            <p>Site <b>Submitted Tests</b> shows which tests were submitted and from which set.</p>
 
             On this page, upon clicking the <b>Download as pdf</b> button, these instructions will be generated into a pdf file. </p> 
         </div>

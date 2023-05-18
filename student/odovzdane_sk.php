@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     $displayValue = 'block';
     if($_SESSION["userType"] == 'teacher'){
@@ -77,27 +78,26 @@ $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </header>
 <body>
 
-<h1>Odovzdané testy</h1>
-<table id="sets" class="table table-striped table-bordered table-hover">
-
-    <thead>
-        <tr>
-        <th>Id testu</th>
-        <th>Id problému</th>
-        <th>Id sady</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php 
-            foreach ($zistujemodovzdane as $sada){
-                echo "<tr><td>$sada[id_test]</td>";
-                echo "<td> $sada[id_problem]</td>";
-                echo "<td> $sada[id_set]</td></tr>";
-            }
-        ?>
-    </tbody>
-
-</table>
-    
+<div class="container-md d-flex flex-column my-3 jistify-content-center">
+    <h2 class="my-3">Odovzdané testy</h2>
+    <table id="sets" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+            <th>Id testu</th>
+            <th>Id príkladu</th>
+            <th>Id sady</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+                foreach ($zistujemodovzdane as $sada){
+                    echo "<tr><td>$sada[id_test]</td>";
+                    echo "<td> $sada[id_problem]</td>";
+                    echo "<td> $sada[id_set]</td></tr>";
+                }
+            ?>
+        </tbody>
+    </table>
+</div>    
 </body>
 </html>

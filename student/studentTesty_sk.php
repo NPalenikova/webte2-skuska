@@ -43,6 +43,9 @@ error_reporting(E_ALL);
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Študentove testy</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="odovzdane_sk.php">Odovzdané testy</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
@@ -59,7 +62,7 @@ error_reporting(E_ALL);
                         <a class="btn btn-secondary" href="../logout_sk.php" style="display: <?php echo $displayValue; ?>">Odhlásiť sa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="manual_sk.php">Návod</a>
+                        <a class="nav-link" href="manual_sk.php">Návod</a>
                     </li>
                 </ul>
             </div>
@@ -138,7 +141,7 @@ error_reporting(E_ALL);
                  INNER JOIN problem ON problem_check.id_problem = problem.id
                 WHERE student_test.id_student = :idZiaka;
                  ";
-     $stmt = $db->prepare($hladamSady);
+        $stmt = $db->prepare($hladamSady);
         $stmt->bindParam(":idZiaka",$ziakIdPrihlaseny );
 
         $stmt->execute();
@@ -378,7 +381,7 @@ error_reporting(E_ALL);
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script type="text/javascript">  resetOverenia();</script>
+<!--     <script type="text/javascript">  resetOverenia();</script> -->
 
 </div>
 

@@ -35,6 +35,9 @@ else{
                     <li class="nav-item">
                         <a class="nav-link" href="studentTesty_sk.php">Študentove testy</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="odovzdane_sk.php">Odovzdané testy</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
@@ -64,12 +67,13 @@ else{
         <div id="manual">
             <h3>Návod pre študenta</h3>
  
-            <p>Stránka <b>Študentove testy</b> umožňuje študentovi prezerať, ktoré testy boli učiteľom zverejnené a s akými pravidlami.<br>
+            <p>Stránka <b>Študentove testy</b> umožňuje študentovi prezerať, ktoré sady boli učiteľom zverejnené a s akými pravidlami.<br>
             Kliknutím na tlačidlo v stĺpci <b>Test</b> sa otvorí vygenerovaný príklad a zobrazí sa políčko pre odpoveď. <br>
             Po kliknutí na tlačidlo <b>Naspäť</b> sa zatvoria aktuálne otvorené príklady.<br>
-            
             Vyplnením políčka <b>Odpoveď</b> zadáte svoje riešnie daného príkladu.<br>
-            Zmeny uložíte kliknutím na tlačidlo <b>Odoslať</b>. <b> Ak nekliknete na talčidlo Potvrdiť, dáta nebudú uložené.</b><br>
+            Odpoveď pošlete kliknutím na tlačidlo <b>Odoslať</b>. <b> Ak nekliknete na talčidlo Odoslať, dáta nebudú uložené.</b><br>
+
+            <p>Stránka <b>Odovzdané testy</b> ukazuje, ktoré testy boli odovzdané.</p>
 
             <p>Na tejto stránke je možné stiahnuť tento návod ako .pdf súbor po kliknutí na tlačidlo <b>Stiahnuť ako .pdf</b>.</p> 
         </div>
