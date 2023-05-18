@@ -41,7 +41,7 @@ try {
         $lastInsertedId = $conn->lastInsertId();
         $response = array(
             'message' => 'Data inserted successfully. pre student_test',
-            'idTest' => $idTest
+            'id_test' => $idTest
         );
     } else {
         $response = array(
@@ -55,23 +55,20 @@ try {
     }
 
 
-    //pokracovat a vytvorit dalsiu tabulku v databaze
-   // $lastInsertedId = $conn->lastInsertId();
 
-// Použitie posledného ID podľa potreby
+    // Použitie posledného ID
     echo "Posledne vytvorene ID: " . $lastInsertedId;
 
-
     $sql = "INSERT INTO problem_check (id_test, id_problem, check_problem, submitted, student_solution)
-            VALUES (:id_problem, :check_problem, 1, :student_solution)";
-
+            VALUES (:id_test,:id_problem, :check_problem, 1 ,:student_solution)";
     //$stmt = $conn->prepare($sql);
-
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id_test', $idTest);
     $stmt->bindParam(':id_problem', $prikladID);
+
     $stmt->bindParam(':check_problem', $check_problem);
     $stmt->bindParam(':student_solution', $student_solution);
+
 
 
     if ($stmt->execute()) {
@@ -85,7 +82,6 @@ try {
     }
     // Uzatvorenie pripojenia k databáze
     $conn = null;
-
 
 
 

@@ -148,21 +148,23 @@ error_reporting(E_ALL);
         $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         //TODO studentove testy
-        echo "overujem studentove testy";
+
+         /*   echo "overujem studentove testy";
 
        foreach ($zistujemodovzdane as $sada){
             echo "<br>";
            //var_dump($sada);
            echo "<br>test $sada[id_test]";
            echo "<br>problem $sada[id_problem]";
-           echo "<br>sada $sada[id_set]";}
-
+           echo "<br>sada $sada[id_set]";
+       }
+        */
            //kazdy z testov by mal mat unikatny kod?
            //mam sadu
 
            //TODO podla id sady dokazem vylucit moznosti
 
-      //
+
 
 
 
