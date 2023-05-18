@@ -214,12 +214,14 @@ function odosliodpoved(){
 
     //check_problem
     //porovnanie
-    console.log("porovnanie "+porovnanie);
+   // console.log("porovnanie "+porovnanie);
 
     if (porovnanie){
         console.log("porovnanie true");
-    }else {
+    } else if(!porovnanie) {
         console.log("porovnanie false");
+    }else{
+        console.log("porovnanie undefined");
     }
 
     //student solution

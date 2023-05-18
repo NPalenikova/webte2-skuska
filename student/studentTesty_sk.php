@@ -16,26 +16,12 @@ error_reporting(E_ALL);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.0.0/math.min.js"></script>
-
-
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     </head>
 
 <body>
-
-<!-- mroz gone
-<style>
-    body {
-
-        background-image: url('../resources/images/mrož.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-</style>
--->
-
 
 
 <body  >
@@ -45,9 +31,6 @@ error_reporting(E_ALL);
 <div class= " text-dark opacity-100 w-75 ps-5 pe-5 vh-100 ">
 
 <ul id="fileList"></ul>
-
-
-
 
 
     <script src="kodNaPorovnanie.js"></script>
@@ -80,71 +63,63 @@ error_reporting(E_ALL);
 
 
 
-
-        $hladamSady =  "SELECT *  FROM student_test 
-             INNER JOIN problem_check ON student_test.id_test = problem_check.id_test 
-             INNER JOIN problem ON problem_check.id_problem = problem.id
-            WHERE student_test.id_student = :idZiaka;
-             ";
-
-
-
-        $stmt = $db->prepare($hladamSady);
-
-        //TODO premenna zodpovedna za id studenta
-        //z emailu
-      //  $_SESSION["id"];
-
-
-      //  $ziakIdPrihlaseny = $_SESSION["id"];
-        $ziakIdPrihlaseny = $_SESSION["fullname"];
+        $ziakMeno = $_SESSION["fullname"];
+        $ziakIdPrihlaseny=  $_SESSION["id"];
+        $ziakIdPrihlaseny=  1;
 
         echo '<script type="text/javascript"> var studentId = "' . $ziakIdPrihlaseny . '"; nastavStudentId(studentId);</script>';
 
 
-        echo "<h2 class='my-4'>Prihlásený: $ziakIdPrihlaseny </h2>";
+        echo "<h2 class='my-4'>Prihlásený: $ziakMeno   </h2>";
 
-
-
+        $hladamSady =  "SELECT *  FROM student_test 
+                 INNER JOIN problem_check ON student_test.id_test = problem_check.id_test 
+                 INNER JOIN problem ON problem_check.id_problem = problem.id
+                WHERE student_test.id_student = :idZiaka;
+                 ";
+     $stmt = $db->prepare($hladamSady);
         $stmt->bindParam(":idZiaka",$ziakIdPrihlaseny );
 
         $stmt->execute();
 
-
-
         $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //TODO studentove testy
-        echo "overujem studentove testy";
+       echo "overujem studentove testy";
 
+      /* var_dump($zistujemodovzdane);
        foreach ($zistujemodovzdane as $sada){
             echo "<br>";
            //var_dump($sada);
            echo "<br>test $sada[id_test]";
            echo "<br>problem $sada[id_problem]";
            echo "<br>sada $sada[id_set]";
+           echo "<br>submitted $sada[submitted]";
 
+           //ulozim sady co ma?
            //kazdy z testov by mal mat unikatny kod?
            //mam sadu
 
            //TODO podla id sady dokazem vylucit moznosti
 
-       }
+       }*/
 
 
 
-        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems";
+        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems WHERE set_problems.allowed =1";
+
+
         $stmt = $db->query($query6);
         $oversadu = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // var_dump($sada);
 
-
+    //potrebujem dostat aj datum z tochto a poslat len tie platne
         //id="sets" class="table table-striped table-bordered table-hover"
 
 
         $arraysad= array();
         foreach ($oversadu as $zjemosadu){
             array_push(  $arraysad, $zjemosadu['id']);
-         //   $arraysad =
+
 
 
         }
@@ -168,7 +143,13 @@ error_reporting(E_ALL);
              echo "<tr> <th> <button type='button' id='$zjemosadu[name]' onclick='tlacidloOdozva($zjemosadu[id] , ".json_encode($arraysad) ." )' class='btn btn-outline-dark'> $zjemosadu[name]</button> </th>";
 
             //datum tam pridat
-            echo "<th> $zjemosadu[date_from] </th><th> $zjemosadu[date_to] </th>";
+             //TODO pridat ci bol submitted
+             //potrebujem prejst studentove odpovede ci nahodou uz neodovzdal
+
+
+            echo "<th> $zjemosadu[date_from] </th><th> $zjemosadu[date_to] </th> <th> false </th";
+
+
 
             echo "</tr>";
 
