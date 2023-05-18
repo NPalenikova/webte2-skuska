@@ -4,10 +4,10 @@ session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'student'){
-        header("location: ../student/studentTesty.php");
+        header("location: ../student/studentTesty_sk.php");
     }
     else{ 
-        header("location: ../teacher/teacher.php");
+        header("location: ../teacher/teacher_sk.php");
     } 
 }
 
@@ -22,23 +22,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userType = $_POST["userType"];
 
     if (checkEmpty($email)) {
-        $errmsg .= "<p>Please enter email.</p>";
+        $errmsg .= "<p>Prosím zadajte email.</p>";
     } 
     elseif (!checkLength($email, 10, 127)) {
-        $errmsg .= "<p>Email has incorrect length.</p>";
+        $errmsg .= "<p>Email má nesprávnu dĺžku.</p>";
     }
     elseif (!checkStuba($email)) {
-        $errmsg .= "<p>Please use a university email.</p>";
+        $errmsg .= "<p>Prosím použite univerzitný email.</p>";
     }
     elseif(!isValidEmail($email)){
-        $errmsg .= "<p>Your email contains prohibited characters.</p>";
+        $errmsg .= "<p>Email obsahuje zakázané znaky.</p>";
     }
 
     if (checkEmpty($user_password)) {
-        $errmsg .= "<p>Please enter a password.</p>";
+        $errmsg .= "<p>Prosím zadajte heslo.</p>";
     }
     elseif(!checkLength($user_password, 8, 20)){
-        $errmsg .= "<p>Password has incorrect length.</p>";
+        $errmsg .= "<p>Heslo má nesprávnu dĺžku.</p>";
     }
 
     if(empty($errmsg)){
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["fullname"] = $row['name'] . " " . $row['surname'];
                         $_SESSION["userType"] = $userType;
                         if($userType == 'student'){
-                            header("location: ../student/studentTesty.php");
+                            header("location: ../student/studentTesty_sk.php");
                         }
                         elseif($userType == 'teacher'){
                             header("location: ../teacher/teacher.php");
@@ -80,13 +80,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $userFound = true;
                         
                     } else {
-                        $errmsg .= "<p>Incorrect email or password.</p>";
+                        $errmsg .= "<p>Nesprávny email alebo heslo.</p>";
                     }
                 } else {
                     $userFound = false;
                 }
             } else {
-                $errmsg .= "<p>Oops, something went wrong.</p>";
+                $errmsg .= "<p>Niečo sa pokazilo.</p>";
             }
         
         
@@ -137,12 +137,12 @@ function isValidEmail($email) {
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Prihlásenie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
@@ -155,20 +155,18 @@ function isValidEmail($email) {
         if($danger){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
-                <p class="m-0 px-1">How did you get here? Please   </p>
-                <a class="btn btn-primary" href="login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
-                <p class="m-0 px-1">   first.</p>
+                <p class="m-0 px-1">Ako si sa sem dostal? Prosím najprv sa   </p>
+                <a class="btn btn-primary" href="login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlás</a>
             </div>';
         }
 
         if(!$userFound){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center p-2">
-                <p class="m-0 px-1">User was not found, please   </p>
-                <a class="btn btn-primary" href="../signup/signup.html" role="button" style="background-color: #1261A0; border-color:#1261A0;">Sign Up</a>
-                <p class="m-0 px-1">   first, or try to   </p>
-                <a class="btn btn-primary" href="login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
-                <p class="m-0 px-1">   again.</p>
+                <p class="m-0 px-1">Používateľ nebol nájdený. Prosím najprv sa   </p>
+                <a class="btn btn-primary" href="../signup/signup_sk.html" role="button" style="background-color: #1261A0; border-color:#1261A0;">Zaregistruj</a>
+                <p class="m-0 px-1">   alebo znova  </p>
+                <a class="btn btn-primary" href="login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlás</a>
             </div>';
         }
         else{

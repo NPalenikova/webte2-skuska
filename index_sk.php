@@ -56,8 +56,8 @@ else{
 </header>
 <body>
     <div class="container my-5" style="display: <?php echo $div; ?>">
-        <a class="btn btn-primary" href="login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlásiť sa</a>
-        <a class="btn btn-primary" href="signup/signup.php" role="button" style="background-color: #072F5F; border-color:#072F5F;">Zaregistrovať sa</a>
+        <a class="btn btn-primary" href="login/login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlásiť sa</a>
+        <a class="btn btn-primary" href="signup/signup_sk.php" role="button" style="background-color: #072F5F; border-color:#072F5F;">Zaregistrovať sa</a>
     </div>
 </body>
 </html>

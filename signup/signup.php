@@ -3,12 +3,14 @@ session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'student'){
-        header("location: ../student/stefanov.php");
+        header("location: ../student/studentTesty.php");
     }
     else{
         header("location: ../teacher/teacher.php");
     }
-    exit;  
+}
+else{
+    header("location: ../index.php");
 }
 ?>
 
@@ -23,6 +25,29 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="signup.js"></script>
 </head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="signup_sk.php">
+                            <img src="../resources/images/sk.png" alt="sk-flag" width="40" height="27">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <img src="../resources/images/uk.png" alt="uk-flag" width="40" height="20">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 <body>
     <div class="d-flex justify-content-end container my-3 ">
         <div class="p-2">Already have an account?</div>
