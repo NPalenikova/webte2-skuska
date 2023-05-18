@@ -142,12 +142,13 @@ error_reporting(E_ALL);
 
 
       //  $ziakIdPrihlaseny = $_SESSION["id"];
-        $ziakIdPrihlaseny = $_SESSION["fullname"];
+        $ziakIdPrihlasenymeno = $_SESSION["fullname"];
 
+    $ziakIdPrihlaseny=  $_SESSION["id"];
         echo '<script type="text/javascript"> var studentId = "' . $ziakIdPrihlaseny . '"; nastavStudentId(studentId);</script>';
 
 
-        echo "<h2 class='my-4'>Welcome $ziakIdPrihlaseny </h2>";
+        echo "<h2 class='my-4'>Welcome $ziakIdPrihlasenymeno </h2>";
 
 
 

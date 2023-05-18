@@ -149,7 +149,7 @@ error_reporting(E_ALL);
 
         //TODO studentove testy
 
-         /*   echo "overujem studentove testy";
+           /* echo "overujem studentove testy";
 
        foreach ($zistujemodovzdane as $sada){
             echo "<br>";
@@ -157,8 +157,8 @@ error_reporting(E_ALL);
            echo "<br>test $sada[id_test]";
            echo "<br>problem $sada[id_problem]";
            echo "<br>sada $sada[id_set]";
-       }
-        */
+       }*/
+
            //kazdy z testov by mal mat unikatny kod?
            //mam sadu
 
@@ -357,7 +357,7 @@ error_reporting(E_ALL);
     <div  class="d-flex flex-column my-2 "  >
 
         <h2>Odpoveď</h2>
-    <textarea class="my-2 " rows='2' cols='40' id="textodpoved"> </textarea>
+    <textarea class="my-2 " rows='2' cols='40' id="textodpoved">test ma udaje</textarea>
 
 
     <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark mb-5'>Odoslať</button>
@@ -365,7 +365,7 @@ error_reporting(E_ALL);
         <script type="text/javascript">  dostanTextareaElement();</script>
 
         <h1 id="output" >  </h1>
-        <script type="text/javascript">  dostanTextareaElement();</script>
+
 
 
 

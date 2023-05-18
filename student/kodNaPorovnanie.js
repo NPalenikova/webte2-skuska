@@ -95,6 +95,7 @@ sadaid ="";
 function dostanTextareaElement(){
 
     textodpoved = document.getElementById("textodpoved");
+    console.log("zober obsah "+textodpoved.value);
 }
 
 //poslat aktualneho
@@ -196,23 +197,71 @@ function odosliodpoved(){
     //porovnanie
    // console.log("porovnanie "+porovnanie);
 
-    if (porovnanie){
-       // console.log("porovnanie true");
-    } else if(!porovnanie) {
-      //  console.log("porovnanie false");
-    }else{
-       // console.log("porovnanie undefined");
-    }
 
-    //student solution
+
+
   //  console.log("zadany text "+textodpoved.innerText);
 
 
         //TODO poslat vsetky data co mam naspat do databazy
 
- 
-      var data = "ziakID="+ encodeURIComponent(studentId)+ "&prikladID="+encodeURIComponent(idprikladu)
+    console.log("studentid "+studentId);
+    console.log("idprikladu "+idprikladu.innerText);
+    console.log("sadaid "+sadaid);
+  //  console.log("porovnanie "+porovnanie);
+    if (porovnanie){
+        console.log("porovnanie true");
+    } else if(!porovnanie) {
+        console.log("porovnanie false");
+    }else{
+        console.log("porovnanie undefined");
+    }
+    console.log("textodpoved "+textodpoved.value);
+
+
+    /*
+ var data = "<data>";
+ data += "<item><studentid>"+studentId+"</studentid><idprikladu>"+idprikladu.innerText+"</idprikladu><sadaid>"+sadaid+"</sadaid><porovnanie>"+porovnanie+"</porovnanie><textodpoved>"+textodpoved.value+"</textodpoved></item>";
+ data += "</data>";*/
+
+    var xhr = new XMLHttpRequest();
+    var url = "odosliProblem_check.php";
+ //   var url = "../test.php";
+
+if (porovnanie){
+    var data = "ziakID="+ encodeURIComponent(studentId)+ "&prikladID="+encodeURIComponent(idprikladu.innerText)
+        +"&sadaID="+encodeURIComponent(sadaid)+"&check_problem="+encodeURIComponent(1)+"&student_solution="+encodeURIComponent(textodpoved.value);
+}else   {
+    var data = "ziakID="+ encodeURIComponent(studentId)+ "&prikladID="+encodeURIComponent(idprikladu.innerText)
+        +"&sadaID="+encodeURIComponent(sadaid)+"&check_problem="+encodeURIComponent(0)+"&student_solution="+encodeURIComponent(textodpoved.value);
+}
+
+
+
+    xhr.open("POST", url, true);
+  //  xhr.setRequestHeader("Content-type", "text/xml");
+
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Spracovanie odpovede od servera
+            console.log(xhr.responseText);
+        }
+    };
+
+    xhr.send(data);
+
+
+
+     /* var data = "ziakID="+ encodeURIComponent(studentId)+ "&prikladID="+encodeURIComponent(idprikladu)
           +"&sadaID="+encodeURIComponent(sadaid)+"&check_problem="+encodeURIComponent(porovnanie)+"&student_solution="+encodeURIComponent(textodpoved.innerText);
+*/
+
+
+
+
+    /*
 
       var xhr = new XMLHttpRequest();
 
@@ -222,7 +271,7 @@ function odosliodpoved(){
       //xhr.open("POST", " https://site88.webte.fei.stuba.sk/skuska/odosliProblem_check.php");
       xhr.open("POST", "odosliProblem_check.php",true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
+*/
       /*
       xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
@@ -231,11 +280,11 @@ function odosliodpoved(){
               xhr.send(data);
           }
       };*/
-    xhr.onreadystatechange = function() {
+ /*   xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
            // console.log("Data inserted successfully.");
         }
     };
-    xhr.send(data);
+    xhr.send(data);*/
 
 }
