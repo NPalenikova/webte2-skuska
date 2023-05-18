@@ -4,7 +4,7 @@ session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'teacher'){
         header("location: ../teacher/teacher.php");
-    }
+    } 
     else{
         header("location: ../student/studentTesty.php");
     }

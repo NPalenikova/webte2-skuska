@@ -6,7 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'teacher'){
         header("location: ../teacher/teacher.php");
     }
-}
+} 
 else{
     $displayValue = 'none';
     header("location: ../index.php");
@@ -194,7 +194,7 @@ error_reporting(E_ALL);
 
         }
 
-        echo " <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark my-2'>Discard</button> ";
+        echo " <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark my-2'>Close</button> ";
        // echo "<tr> <th> <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark'> x</button> </th>";
         echo "<table id='sets' class='table table-striped table-bordered table-hover'>";
             echo '  <thead>

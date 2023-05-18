@@ -62,28 +62,14 @@ else{
     <div class ="container-md my-3 py-3">
         <button id="download" class="btn btn-outline-secondary my-3" onclick="generatePDF()">Stiahnuť ako .pdf</button>
         <div id="manual">
-            <h3>Návod pre učiteľa</h3>
- 
-            <p>Stránka <b>Sady príkladov</b> umožňuje učiteľovi definovať pravidlá pre sady príkladov šťahované z priečinku <b>latex_subory</b>.<br>
-            Po kliknutí na tlačidlo <b>Aktualizovať</b> sa súbory stiahnu z priečinku a sú uložené do databázy.<br>
-            Po aktualizácii sa zobrazí tabuľka, ktorá obsahuje všetky súbory a dovoľuje nastaviť ich pravidlá.<br>
-            Zaškrknutím políčka v stĺpci <b>Povolené</b> vyberiete, z ktorých súborov môžu študenti generovať príklady.<br>
-            Zaškrknutím políčka v stĺpci <b>Určiť dátum</b> môžete zadefinovať v akom časovom období môžu študenti generovať príklady z tejto sady.<br>
-            Ak nezaškrtnete políčko <b>Určiť dátum</b>, študenti budú môcť generovať príklady z tejto sady kedykoľvek.<br>
-            Ak zaškrtnete políčko <b>Určiť dátum</b> a určíte iba <b>Dátum od</b>, <b>Dátum do</b> sa automaticky nastaví na <b>9999-12-31</b>.<br>
-            Ak zaškrtnete políčko <b>Určiť dátum</b> a určíte iba <b>Dátum do</b>, <b>Dátum od</b> sa automaticky nastaví na <b>1000-01-01</b>.<br>
-            Ak zaškrtnete políčko <b>Určiť dátum</b> a neurčíte <b>Dátum od</b> ani <b>Dátum do</b>, dátumy sa automaticky nastavia na <b>1000-01-01</b> a <b>9999-12-31</b>.<br>
-            V tomto prípade si takisto študenti budú môcť generovať príklady z tejto sady kedykoľvek. <br>
-            Vyplnením políčka <b>Body</b>, zadefinujete počet bodov, ktorý bude udelený za každý príklad z danej sady.<br>
-            Zmeny uložíte kliknutím na tlačidlo <b>Potvrdiť</b>. <b> Ak nekliknete na talčidlo Potvrdiť, dáta nebudú uložené.</b><br>
-            <b>Pri Aktualizovaní súborov sú všetky predchádzajúce dáta vymazané.</b></p>
+            <p>Site <b>Student's test</b> allows the student to see which tests have been allowed by the teacher and with what rules.<br>
+            By pressing the button in column <b>Test</b> you will see the problem generated from the selected set and a field for your solution. <br>
+            By pressing the button <b>Close</b> you will close all of the generated problems.<br>
+            
+            You can enter your solution of the given problem into the <b>Solution</b> text field.<br>
+            By pressing the <b>Submit button</b> you can submit your solution. <b> If you do not click Submit the data won't be saved.</b><br>
 
-            <p>Stránka <b>Študenti</b> umožňuje prezerať koľko príkladov študent odovzdal, koľko bolo správnych a koľko za ne získal bodov.<br>
-            Túto tabuľku môžete exportovať do .csv súboru kliknutím na tlačidlo <b>Stiahnuť ako .csv</b>. <br>
-            Po kliknutí na riadok v tabuľke sa zobrazí <b>Detail</b> študenta. Následne uvidíte, ktoré príklady si študent vygeneroval, 
-            či boli odovzdané, či boli správne, študentovo riešenie a získané body za daný príklad.</p>
-
-            <p>Na tejto stránke je možné stiahnuť tento návod ako .pdf súbor po kliknutí na tlačidlo <b>Stiahnuť ako .pdf</b>.</p> 
+            On this page, upon clicking the <b>Download as pdf</b> button, these instructions will be generated into a pdf file. </p> 
         </div>
     </div>
 

@@ -6,7 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["userType"] == 'teacher'){
         header("location: ../teacher/teacher_sk.php");
     }
-}
+} 
 else{
     $displayValue = 'none';
     header("location: ../index_sk.php");
