@@ -9,9 +9,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         header("location: ../teacher/teacher_sk.php");
     } 
 }
-else{
-    header("location: ../index_sk.php");
-}
 ?>
 
 <!DOCTYPE html>
