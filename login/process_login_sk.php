@@ -10,6 +10,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         header("location: ../teacher/teacher_sk.php");
     } 
 }
+else{
+    $danger = true;
+}
 
 require_once "../config.php";
 $danger = false;
@@ -91,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         
         } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            echo "Spojenie sa nepodarilo" . $e->getMessage();
         }
         
     }
@@ -151,16 +154,14 @@ function isValidEmail($email) {
         if (!empty($errmsg)) {
             echo $errmsg;
         }
-
-        if($danger){
+        elseif($danger){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
                 <p class="m-0 px-1">Ako si sa sem dostal? Prosím najprv sa   </p>
                 <a class="btn btn-primary" href="login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlás</a>
             </div>';
         }
-
-        if(!$userFound){
+        elseif(!$userFound){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center p-2">
                 <p class="m-0 px-1">Používateľ nebol nájdený. Prosím najprv sa   </p>
@@ -169,7 +170,7 @@ function isValidEmail($email) {
                 <a class="btn btn-primary" href="login_sk.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Prihlás</a>
             </div>';
         }
-        else{
+        elseif(empty($errmsg) && !$danger && $userFound){
             echo"Welcome " . $_SESSION["fullname"];
         }
     ?>
