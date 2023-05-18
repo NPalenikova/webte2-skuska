@@ -305,7 +305,7 @@ error_reporting(E_ALL);
                             //echo "<br>nema g:".$priklady[$vybraty]['description'];
 
                             $oddelvzorce='/[$]/';
-                            if ($dostan=preg_split($oddelvzorce, $zvastdescrition)){
+                            if ($dostan=preg_split($oddelvzorce, $zvastdescrition[1])){
 
                                 $a=1;
                                 //zacina nevzorcom takze ide to zisti podla toho ci je kladne alebo
