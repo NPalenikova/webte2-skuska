@@ -13,7 +13,7 @@
     }
     else{
         $displayValue = 'none';
-        header("location: ../index.php");
+        header("location: ../index_sk.php");
     }
 
 require_once('../config.php');
@@ -29,7 +29,7 @@ try {
     $stmt->execute([$_GET['id']]);
     $student = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($stmt->rowCount() === 0){
-        header("location: students.php");
+        header("location: students_sk.php");
     }
 } catch (PDOException $e) {
     echo $e->getMessage();
@@ -51,7 +51,7 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Detail of student</title>
+    <title>Detail študenta</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -69,18 +69,18 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="teacher.php">Sets</a>
+                        <a class="nav-link" href="teacher_sk.php">Sady príkladov</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="students.php">Students</a>
+                        <a class="nav-link active" aria-current="page" href="students_sk.php">Študenti</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="btn btn-secondary" href="../logout.php" style="display: <?php echo $displayValue; ?>">Log out</a>
+                        <a class="btn btn-secondary" href="../logout_sk.php" style="display: <?php echo $displayValue; ?>">Odhlásiť sa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="manual.php">Manual</a>
+                        <a class="nav-link active" href="manual_sk.php">Návod</a>
                     </li>
                 </ul>
             </div>
@@ -90,7 +90,7 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <div class="container">
     <div>
-        <h1>Infomation about student:</h1>
+        <h1>Informácie o študentovi:</h1>
         <?php
          echo '<h2>' . $student["name"] . ' ' . $student["surname"] . '</h2>';
         ?>
@@ -99,11 +99,11 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Task</th>
-                    <th>Submitted</th>
-                    <th>Correct</th>
-                    <th>Solution</th>
-                    <th>Points</th>
+                    <th>Príklad</th>
+                    <th>Odovzdaný</th>
+                    <th>Správny</th>
+                    <th>Riešenie</th>
+                    <th>Body</th>
                 </tr>
             </thead>
             <tbody>
@@ -111,16 +111,16 @@ $problems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($problems as $problem){
                     if ($problem["check_problem"] == 1){
                         $border = "style=\"background-color: #CEFFD0\"";
-                        $correct = "yes";
+                        $correct = "áno";
                     } else if ($problem["check_problem"] == 0){
                         $border = "style=\"background-color: #FFAFAF\"";
-                        $correct = "no";
+                        $correct = "nie";
                     }
                     if ($problem["submitted"] == 1){
-                        $submitted = "yes";
+                        $submitted = "áno";
                     } else if ($problem["submitted"] == 0) {
                         $border = "";
-                        $submitted = "no";
+                        $submitted = "nie";
                     }
                     echo '<tr ' . $border . '><td>'. $problem["task"] . '</td>
                 <td>'. $submitted . '</td>

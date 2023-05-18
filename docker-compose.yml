@@ -1,5 +1,4 @@
-version: "3.8"
-
+version: '3.8'
 services:
   php:
     build:
@@ -9,6 +8,12 @@ services:
       - 8080:80
     depends_on:
       - mysql
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: sadasad
+      MYSQL_USER: --- #add
+      MYSQL_PASSWORD: --- #add
 
   mysql:
     image: mysql:8.0
@@ -16,8 +21,4 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: 7yG0I8LGyEb3P1c
-      MYSQL_DB_CONNECTION: localhost
-      MYSQL_DB_NAME: krajiny
-      MYSQL_USER: xchrappaj
-      MYSQL_PASSWORD: 7yG0I8LGyEb3P1c
+      MYSQL_ROOT_PASSWORD: --- #add
