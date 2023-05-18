@@ -146,6 +146,7 @@ error_reporting(E_ALL);
 
 
         $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         //TODO studentove testy
         //echo "overujem studentove testy";
 /*
@@ -161,7 +162,7 @@ error_reporting(E_ALL);
 
            //TODO podla id sady dokazem vylucit moznosti
 
-       }
+      // }
 
 
 
