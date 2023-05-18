@@ -236,7 +236,7 @@ function odosliodpoved(){
 
       var xhr = new XMLHttpRequest();
 
-
+ 
       //TODO inu adresu, aby vedel posielat
 
       //xhr.open("POST", " https://site88.webte.fei.stuba.sk/skuska/odosliProblem_check.php");

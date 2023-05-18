@@ -1,5 +1,18 @@
 <?php
 
+session_start();
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    if($_SESSION["userType"] == 'teacher'){
+        header("location: ../teacher/teacher.php");
+    } 
+    else{
+        header("location: ../student/studentTesty.php");
+    }
+}
+else{
+    $displayValue = 'none';
+    header("location: ../index_sk.php");
+}
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
