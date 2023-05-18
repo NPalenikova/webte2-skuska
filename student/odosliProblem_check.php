@@ -22,10 +22,10 @@ try {
     $conn = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
 
     // Vytvorenie prikazu s parametrami
-    $sql = "INSERT INTO your_table_name (ziakID, prikladID, sadaID, check_problem, student_solution)
-            VALUES (:ziakID, :prikladID, :sadaID, :check_problem, :student_solution)";
+    /*$sql = "INSERT INTO your_table_name (ziakID, prikladID, sadaID, check_problem, student_solution)
+            VALUES (:ziakID, :prikladID, :sadaID, :check_problem, :student_solution)";*/
 
-    $sql = "INSERT INTO your_table_name (id_problem, check_problem, submitted, student_solution)
+    $sql = "INSERT INTO problem_check (id_problem, check_problem, submitted, student_solution)
             VALUES (:id_problem, :check_problem, :sadaID, :check_problem, :student_solution)";
 
     $stmt = $conn->prepare($sql);
@@ -35,6 +35,7 @@ try {
     $stmt->bindParam(':check_problem', $check_problem);
     $stmt->bindParam(':student_solution', $student_solution);
 
+    //not worky
     if ($stmt->execute()) {
         $response = array(
             'message' => 'Data inserted successfully.'
@@ -52,3 +53,6 @@ try {
         'error' => 'Database connection failed: ' . $e->getMessage()
     );
 }
+
+header('Content-Type: application/json');
+echo json_encode($response);

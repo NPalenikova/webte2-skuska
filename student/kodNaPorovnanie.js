@@ -90,7 +90,7 @@ function convertLatexToRaw(latexExpression) {
 sadaid ="";
 //var textodpoved = document.getElementById("textodpoved");
 
- textodpoved ;
+ textodpoved="";
 
 function dostanTextareaElement(){
 
