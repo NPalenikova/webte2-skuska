@@ -177,7 +177,7 @@ error_reporting(E_ALL);
 
 
 
-        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems";
+        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems WHERE set_problems.allowed =1";
         $stmt = $db->query($query6);
         $oversadu = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // var_dump($sada);

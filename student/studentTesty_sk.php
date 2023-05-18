@@ -126,7 +126,7 @@ error_reporting(E_ALL);
         $ziakMeno = $_SESSION["fullname"];
         $ziakIdPrihlaseny=  $_SESSION["id"];
        //test ziaka s danym id
-    // $ziakIdPrihlaseny=  1;
+      //  $ziakIdPrihlaseny=  1;
 
         echo '<script type="text/javascript"> var studentId = "' . $ziakIdPrihlaseny . '"; nastavStudentId(studentId);</script>';
 
@@ -148,25 +148,25 @@ error_reporting(E_ALL);
         $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         //TODO studentove testy
-        //echo "overujem studentove testy";
-/*
+        echo "overujem studentove testy";
+
        foreach ($zistujemodovzdane as $sada){
             echo "<br>";
            //var_dump($sada);
            echo "<br>test $sada[id_test]";
            echo "<br>problem $sada[id_problem]";
-           echo "<br>sada $sada[id_set]";
-*/
+           echo "<br>sada $sada[id_set]";}
+
            //kazdy z testov by mal mat unikatny kod?
            //mam sadu
 
            //TODO podla id sady dokazem vylucit moznosti
 
-      // }
+      //
 
 
 
-        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems";
+        $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems WHERE set_problems.allowed =1";
         $stmt = $db->query($query6);
         $oversadu = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // var_dump($sada);
