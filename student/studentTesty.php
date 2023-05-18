@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 
 ini_set('display_errors', 1);
@@ -35,24 +36,18 @@ error_reporting(E_ALL);
 </style>
 -->
 
-<a href="../index.php">index</a>
 
 
 <body  >
  
 <div class="d-flex justify-content-center">
 
-<div class= " text-light bg-secondary opacity-75 w-75 ps-5 pe-5 vh-100 ">
+<div class= " text-dark opacity-100 w-75 ps-5 pe-5 vh-100 ">
 
 <ul id="fileList"></ul>
 
 
-    <br>
 
-    <div>
-        <h2>z databazy:</h2>
-        </div>
-    <br>
 
 
     <script src="kodNaPorovnanie.js"></script>
@@ -97,12 +92,17 @@ error_reporting(E_ALL);
         $stmt = $db->prepare($hladamSady);
 
         //TODO premenna zodpovedna za id studenta
-        $ziakIdPrihlaseny = 1;
+        //z emailu
+      //  $_SESSION["id"];
+
+
+      //  $ziakIdPrihlaseny = $_SESSION["id"];
+        $ziakIdPrihlaseny = $_SESSION["fullname"];
 
         echo '<script type="text/javascript"> var studentId = "' . $ziakIdPrihlaseny . '"; nastavStudentId(studentId);</script>';
 
 
-        echo "<h2>Prihlaseny studentId: $ziakIdPrihlaseny </h2>";
+        echo "<h2 class='my-4'>Prihlásený: $ziakIdPrihlaseny </h2>";
 
 
 
@@ -114,8 +114,8 @@ error_reporting(E_ALL);
 
         $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //TODO studentove testy
-      //  echo "overujem studentove testy";
-        /*
+        echo "overujem studentove testy";
+
        foreach ($zistujemodovzdane as $sada){
             echo "<br>";
            //var_dump($sada);
@@ -128,9 +128,8 @@ error_reporting(E_ALL);
 
            //TODO podla id sady dokazem vylucit moznosti
 
-       }*/
+       }
 
-        //vyvorit array a ulozit ake sady uz naklikal?
 
 
         $query6 =  "SELECT id, allowed , date_from , date_to, name  FROM set_problems";
@@ -139,7 +138,8 @@ error_reporting(E_ALL);
         // var_dump($sada);
 
 
-        echo "<table>";
+        //id="sets" class="table table-striped table-bordered table-hover"
+
 
         $arraysad= array();
         foreach ($oversadu as $zjemosadu){
@@ -149,15 +149,26 @@ error_reporting(E_ALL);
 
         }
 
-        echo "<tr> <th> <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ." )'> x</button> </th>";
+        echo " <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark my-2'> Naspäť</button> ";
+       // echo "<tr> <th> <button type='button' id='x' onclick='tlacidloOdozva( \"Hello, world!\", ".json_encode($arraysad) ."  )' class='btn btn-outline-dark'> x</button> </th>";
+        echo "<table id='sets' class='table table-striped table-bordered table-hover'>";
+            echo '  <thead>
+            <tr>
+                <th>Test</th>
+                <th>Dátum od</th>
+                <th>Dátum do</th>
+                <th>Odovzdané</th>
+                
+            </tr>
+            </thead>';
 
          foreach ($oversadu as $zjemosadu){
 
 
-             echo "<tr> <th> <button type='button' id='$zjemosadu[name]' onclick='tlacidloOdozva($zjemosadu[id] , ".json_encode($arraysad) ." )'> $zjemosadu[name]</button> </th>";
+             echo "<tr> <th> <button type='button' id='$zjemosadu[name]' onclick='tlacidloOdozva($zjemosadu[id] , ".json_encode($arraysad) ." )' class='btn btn-outline-dark'> $zjemosadu[name]</button> </th>";
 
             //datum tam pridat
-            echo "<th>od $zjemosadu[date_from] </th><th>do $zjemosadu[date_to] </th>";
+            echo "<th> $zjemosadu[date_from] </th><th> $zjemosadu[date_to] </th>";
 
             echo "</tr>";
 
@@ -200,7 +211,7 @@ error_reporting(E_ALL);
                 $vybraty =  rand( 0,  sizeof($priklady)-1); //tuna vybere priklad
 
 
-                   echo "<br> <h2> Priklad: ". $priklady[$vybraty]['task']."</h2>";
+                   echo "<br> <h2> Príklad: ". $priklady[$vybraty]['task']."</h2>";
                         //TODO este rozparsovat description a vytiahnut obrazok a
                         // vytiahnut vzorec - kod na to je, poprepajat
                         //vzrorec je vyznaceny $  na zaciatku a konci
@@ -240,7 +251,7 @@ error_reporting(E_ALL);
 
                             echo '<img  src="../latex_subory/' .  $priklady[$vybraty]['picture_path'] . '" alt="Obrázok"  class = "img-responsive img-thumbnail">';
 
-                            echo "<br>id prikladu ".$priklady[$vybraty]['id'];
+                         //   echo "<br>id prikladu ".$priklady[$vybraty]['id'];
                            // echo "<br>Solution ".$priklady[$vybraty]['solution'];
 
 
@@ -304,18 +315,23 @@ error_reporting(E_ALL);
 
     ?>
 
+    <div id="odpoved" style="display: none;" >
 
-    <div id="odpoved" style='display: none;'">
-        <h2>Odpoved</h2>
-    <textarea rows='2' cols='40' id="textodpoved"> </textarea>
-    <button type='button' id="buttonodosli" onclick="odosliodpoved()">Click Me!</button>
+
+    <div  class="d-flex flex-column my-2 "  >
+
+        <h2>Odpoveď</h2>
+    <textarea class="my-2 " rows='2' cols='40' id="textodpoved"> </textarea>
+
+
+    <button type='button' id="buttonodosli" onclick="odosliodpoved()" class='btn btn-outline-dark'>Odoslať</button>
 
    <script type="text/javascript">  dostanTextareaElement();</script>
+    </div>
+    </div>
 
+    <h1 id="output" style="display: none">  </h1>
 
-</div>
-    <h1 id="output">  </h1>
-    <div ></div>
 
 
 

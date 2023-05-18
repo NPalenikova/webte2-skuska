@@ -9,13 +9,11 @@ error_reporting(E_ALL);
 require_once('../config.php');
 
 
-
     $ziakID=  $_POST["ziakID"];
     $prikladID= $_POST["prikladID"];
     $sadaID= $_POST["sadaID"];
     $check_problem= $_POST["check_problem"];
     $student_solution= $_POST["student_solution"];
-
 
 
 try {
