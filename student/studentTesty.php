@@ -162,7 +162,7 @@ error_reporting(E_ALL);
         //TODO studentove testy
         //echo "overujem studentove testy";
 
-       foreach ($zistujemodovzdane as $sada){
+      /* foreach ($zistujemodovzdane as $sada){
             echo "<br>";
            //var_dump($sada);
            echo "<br>test $sada[id_test]";
@@ -174,7 +174,7 @@ error_reporting(E_ALL);
 
            //TODO podla id sady dokazem vylucit moznosti
 
-       }
+       }*/
 
 
 
