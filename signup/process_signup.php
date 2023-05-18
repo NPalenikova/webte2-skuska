@@ -207,7 +207,7 @@ function userExists($db, $email, $userType){
             echo
             '<div class="d-flex flex-row justify-content-center align-items-center">
                 <p class="m-0 px-1">How did you get here? Please   </p>
-                <a class="btn btn-primary" href="login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
+                <a class="btn btn-primary" href="../login/login.php" role="button" style="background-color: #1261A0; border-color:#1261A0;">Log In</a>
                 <p class="m-0 px-1">   first.</p>
             </div>';
         }
