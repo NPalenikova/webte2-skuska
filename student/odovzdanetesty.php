@@ -1,18 +1,8 @@
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
-
-
-
 <?php
 session_start();
 
 require_once('../config.php');
 $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-
-
-
-
 
 $ziakIdPrihlaseny=  $_SESSION["id"];
 
@@ -23,37 +13,43 @@ $hladamSady =  "SELECT *  FROM student_test
                  ";
 $stmt = $db->prepare($hladamSady);
 $stmt->bindParam(":idZiaka",$ziakIdPrihlaseny );
-
 $stmt->execute();
 
-
-
 $zistujemodovzdane = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 
-//TODO studentove testy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
 
+<h1>Submitted tests</h1>
+<table id="sets" class="table table-striped table-bordered table-hover">
 
-echo "<h1>Prehlad testov</h1>";
+    <thead>
+        <tr>
+        <th>Test id</th>
+        <th>Problem id</th>
+        <th>Set id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+            foreach ($zistujemodovzdane as $sada){
+                echo " <tr><th>test $sada[id_test]</th>";
+                echo "<th>problem $sada[id_problem]</th>";
+                echo "<th>sada $sada[id_set]</th>";
+            }
+        ?>
+    </tbody>
 
-echo "<table id='sets' class='table table-striped table-bordered table-hover'>";
-echo '  <thead>
-            <tr>
-                <th>id test</th>
-                <th>id problem</th>
-                <th>id sada</th>
-                
-                
-            </tr>
-            </thead>';
-
-
-foreach ($zistujemodovzdane as $sada){
-
-
-    //var_dump($sada);
-    echo " <tr><th>test $sada[id_test]</th>";
-    echo "<th>problem $sada[id_problem]</th>";
-    echo "<th>sada $sada[id_set]</th>";
-   // echo "</div>";
-}
-echo "</table>";
+</table>
+    
+</body>
+</html>
