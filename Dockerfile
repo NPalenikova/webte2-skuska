@@ -8,7 +8,7 @@ COPY . /var/www/html
 
 RUN echo 'SetEnv MYSQL_DB_CONNECTION mysql' >> /etc/apache2/conf-enabled/environment.conf
 RUN echo 'SetEnv MYSQL_DB_NAME sadasad' >> /etc/apache2/conf-enabled/environment.conf
-RUN echo 'SetEnv MYSQL_USER root' >> /etc/apache2/conf-enabled/environment.conf
+RUN echo 'SetEnv MYSQL_USER xchrappaj' >> /etc/apache2/conf-enabled/environment.conf
 RUN echo 'SetEnv MYSQL_PASSWORD 7yG0I8LGyEb3P1c' >> /etc/apache2/conf-enabled/environment.conf
 
 RUN echo "ServerName mysql" >> /etc/apache2/apache2.conf
